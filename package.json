@@ -15,6 +15,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/rebass": "^4.0.10",
     "@types/recharts": "^1.8.23",
+    "gh-pages": "^4.0.0",
     "leaflet": "^1.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -27,9 +28,10 @@
   },
   "scripts": {
     "start": "react-scripts --max_old_space_size=1024 start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
