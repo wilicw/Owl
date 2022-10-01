@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from '@fluentui/react-components/unstable';
 import {
   Title2,
@@ -20,13 +20,25 @@ interface MissionPanelProps {
 }
 
 function MissionPanel({ missionName, rocketType, motorType, avionicType, message }: MissionPanelProps) {
+  const [lock, setLock] = useState(true);
+  const [launch, setLaunch] = useState(false);
+
+  const launchProcess = () => {
+    setLaunch(true)
+  }
+
+  const abortProcess = () => {
+    setLock(true)
+    setLaunch(false)
+  }
+
   return (
     <Card>
       <div>
-        <Title2 block align='center'>{ missionName}</Title2>
+        <Title2 block align='center'>{missionName}</Title2>
         <Separator />
         <Subtitle1 block>Rocket Type</Subtitle1>
-        <Body1 block>{ rocketType}</Body1>
+        <Body1 block>{rocketType}</Body1>
         <Separator />
         <Subtitle1 block>Motor Type</Subtitle1>
         <Body1 block>{motorType}</Body1>
@@ -44,12 +56,14 @@ function MissionPanel({ missionName, rocketType, motorType, avionicType, message
       <CompoundButton
         size='large'
         appearance='primary'
-        secondaryContent="Unlock before launching"
-        disabled={true}
+        style={{ backgroundColor: launch ? "#bc2f32" : "" }}
+        secondaryContent={lock ? "Unlock before launching" : ""}
+        disabled={lock}
+        onClick={() => launch ? abortProcess() : launchProcess()}
       >
-        Launch
+        {launch ? "Abort" : "Launch"}
       </CompoundButton>
-      <Button>Unlock</Button>
+      <Button onClick={() => setLock(!lock)} disabled={launch}>{lock ? "Unlock" : "Lock"}</Button>
     </Card>
   );
 }
