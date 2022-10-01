@@ -8,17 +8,11 @@ import MissionPanel from './components/MissionPanel';
 import ValueLabel from './components/ValueLabel';
 import GPSMap from './components/GPSMap';
 
-function App() {
+interface AutoMapProps {
+  height: number
+}
 
-  const cardHeight = window.innerHeight / 4;
-  let data: any = [];
-  for (let i = 0; i < 1000; i++) {
-    data.push({
-      time: i,
-      value: Math.sin(0.05 * i)
-    })
-  }
-
+function AutoMap({ height }: AutoMapProps) {
   const [position, setPosition] = useState({ lat: 0, long: 0 });
 
   useEffect(() => {
@@ -29,6 +23,19 @@ function App() {
       }))
     }
   }, [])
+  return <GPSMap height={height} latitude={position.lat} longitude={position.long} />
+}
+
+function App() {
+
+  const cardHeight = window.innerHeight / 4;
+  let data: any = [];
+  for (let i = 0; i < 1000; i++) {
+    data.push({
+      time: i,
+      value: Math.sin(0.05 * i)
+    })
+  }
 
   return (
     <Flex flexWrap='wrap' mx={2} height="100vh">
@@ -177,7 +184,7 @@ function App() {
             width={[1, 1, 1, 1 / 2]}
             p={2}
           >
-            <GPSMap height={cardHeight} latitude={position.lat} longitude={position.long} />
+            <AutoMap height={cardHeight} />
           </Box>
         </Flex>
       </Box>
