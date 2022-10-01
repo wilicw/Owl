@@ -8,6 +8,8 @@ import MissionPanel from './components/MissionPanel';
 import ValueLabel from './components/ValueLabel';
 import GPSMap from './components/GPSMap';
 
+import weatherObservable from './services/WeatherProvider';
+
 interface AutoMapProps {
   height: number
 }
@@ -26,7 +28,72 @@ function AutoMap({ height }: AutoMapProps) {
   return <GPSMap height={height} latitude={position.lat} longitude={position.long} />
 }
 
+function WeatherLabel() {
+
+  const [weather, setWeather] = useState(0)
+
+  useEffect(() => {
+    const subscription = weatherObservable.subscribe((data: any) => setWeather(data.weather))
+    return () => subscription.unsubscribe()
+  }, [])
+
+  return (
+    <ValueLabel
+      labelColor='#6a975d'
+      labelName='Weather'
+      value={weather || 'Sunny'}
+    />
+  )
+}
+
+function TemperatureLabel() {
+
+  const [temperature, setTemperature] = useState(0)
+
+  useEffect(() => {
+    const subscription = weatherObservable.subscribe((data: any) => setTemperature(data.temperature))
+    return () => subscription.unsubscribe()
+  }, [])
+
+  return (
+    <ValueLabel
+      labelColor='#e39e7e'
+      labelName='Temperature'
+      unit='℃'
+      value={temperature}
+    />
+  )
+}
+
+function WindLabel() {
+
+  interface IWind {
+    speed: number;
+    direction: string;
+  }
+
+  const [wind, setWind] = useState<IWind>({ speed: 0, direction: "" })
+
+  useEffect(() => {
+    const subscription = weatherObservable.subscribe((data: any) => setWind({
+      speed: data.wind.speed,
+      direction: data.wind.direction
+    }))
+    return () => subscription.unsubscribe()
+  }, [])
+
+  return (
+    <ValueLabel
+      labelColor='#7eb4e3'
+      labelName='Wind'
+      unit={'knot ' + (wind.speed === 0 ? '' : wind.direction)}
+      value={wind.speed}
+    />
+  )
+}
+
 function App() {
+
 
   const cardHeight = window.innerHeight / 4;
   let data: any = [];
@@ -46,6 +113,7 @@ function App() {
       </Box>
       <Box
         width={[1, 1, 1 / 2, 3 / 4]}
+        p={2}
       >
         <Card
           appearance='subtle'
@@ -105,19 +173,9 @@ function App() {
               value='IDLE'
             />
 
-            <ValueLabel
-              labelColor='#555'
-              labelName='Wind'
-              unit='knot'
-              value={11}
-            />
-
-            <ValueLabel
-              labelColor='#555'
-              labelName='Weather'
-              value='Sunny'
-            />
-
+            <WindLabel />
+            <TemperatureLabel />
+            <WeatherLabel />
           </div>
         </Card>
       </Box>
