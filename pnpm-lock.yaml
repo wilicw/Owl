@@ -1,20 +1,22 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@chiragrupani/fullscreen-react': ^1.2.5
   '@fluentui/react': ^8.96.2
   '@fluentui/react-components': ^9.3.2
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
   '@testing-library/user-event': ^13.5.0
   '@types/jest': ^27.5.2
+  '@types/leaflet': ^1.8.0
   '@types/node': ^16.11.61
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
   '@types/rebass': ^4.0.10
   '@types/recharts': ^1.8.23
+  leaflet: ^1.9.1
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-leaflet: ^4.1.0
   react-scripts: 5.0.1
   rebass: ^4.0.7
   recharts: ^2.1.14
@@ -22,20 +24,22 @@ specifiers:
   web-vitals: ^2.1.4
 
 dependencies:
-  '@chiragrupani/fullscreen-react': 1.2.5_biqbaboplfbrettd7655fr4n2y
   '@fluentui/react': 8.96.2_5uumaiclxbdbzaqafclbf6maf4
   '@fluentui/react-components': 9.3.2_awtkgwspba2uyv6p3odaxw3pri
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 13.5.0_znccgeejomvff3jrsk3ljovfpu
   '@types/jest': 27.5.2
+  '@types/leaflet': 1.8.0
   '@types/node': 16.11.62
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@types/rebass': 4.0.10
   '@types/recharts': 1.8.23
+  leaflet: 1.9.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-leaflet: 4.1.0_6yalbjtj7k4yykioxumfwzwadm
   react-scripts: 5.0.1_qkk2h7iyrlo4uzewmb6meqitne
   rebass: 4.0.7_react@18.2.0
   recharts: 2.1.14_v2m5e27vhdewzwhryxwfaorcca
@@ -1432,16 +1436,6 @@ packages:
 
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
-    dev: false
-
-  /@chiragrupani/fullscreen-react/1.2.5_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-J2Da01MLgHL7bE1UzIMQNtxZgcrZaBLXrRuw8BL6u5pLtSD3qBgqZb4W2CeFTFZyl1R+irazYzo9smAT6j2WEg==}
-    peerDependencies:
-      react: '>=17.0'
-      react-dom: '>=17.0'
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@csstools/normalize.css/12.0.0:
@@ -3224,6 +3218,18 @@ packages:
       webpack-dev-server: 4.11.1_webpack@5.74.0
     dev: false
 
+  /@react-leaflet/core/2.1.0_6yalbjtj7k4yykioxumfwzwadm:
+    resolution: {integrity: sha512-Qk7Pfu8BSarKGqILj4x7bCSZ1pjuAPZ+qmRwH5S7mDS91VSbVVsJSrW4qA+GPrro8t69gFYVMWb1Zc4yFmPiVg==}
+    peerDependencies:
+      leaflet: ^1.9.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      leaflet: 1.9.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@rollup/plugin-babel/5.3.1_r56fldxoyazzliugjcx2ns4pma:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
     engines: {node: '>= 10.0.0'}
@@ -3702,6 +3708,10 @@ packages:
       '@types/serve-static': 1.15.0
     dev: false
 
+  /@types/geojson/7946.0.10:
+    resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
+    dev: false
+
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
@@ -3754,6 +3764,12 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: false
+
+  /@types/leaflet/1.8.0:
+    resolution: {integrity: sha512-+sXFmiJTFdhaXXIGFlV5re9AdqtAODoXbGAvxx02e5SHXL3ir7ClP5J7pahO8VmzKY3dth4RUS1nf2BTT+DW1A==}
+    dependencies:
+      '@types/geojson': 7946.0.10
     dev: false
 
   /@types/mime/3.0.1:
@@ -7949,6 +7965,10 @@ packages:
       language-subtag-registry: 0.3.22
     dev: false
 
+  /leaflet/1.9.1:
+    resolution: {integrity: sha512-5FcDAMTLAuOq0RisQQbTFatl8Sl4bM0gMrBfuHbl7CYbYJv45BfCS8oU3T644MLjleBq1Ncq541QEA1pqUGTFA==}
+    dev: false
+
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -9591,6 +9611,19 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-leaflet/4.1.0_6yalbjtj7k4yykioxumfwzwadm:
+    resolution: {integrity: sha512-i+V9pX5lywJ48O2+K3USeeTdYLIhxnLMweH+YLd/UPqVIj3uKzE3Q29bzt83PBtViyZmxDlulzC6uoR3JLiE9A==}
+    peerDependencies:
+      leaflet: ^1.9.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      '@react-leaflet/core': 2.1.0_6yalbjtj7k4yykioxumfwzwadm
+      leaflet: 1.9.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-lifecycles-compat/3.0.4:
