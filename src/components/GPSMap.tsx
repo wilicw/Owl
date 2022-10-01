@@ -9,7 +9,7 @@ interface GPSMapProps {
 
 function GPSMap({ height, latitude, longitude }: GPSMapProps) {
   return (
-    <Card appearance='subtle' style={{ height: height, width: "100%", padding: 0 }}>
+    <Card style={{ height: height, width: "100%", padding: 0 }}>
       <MapContainer
         zoomControl={false}
         key={JSON.stringify([latitude, longitude])}
