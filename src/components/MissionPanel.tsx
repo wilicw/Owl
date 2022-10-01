@@ -35,7 +35,12 @@ function MissionPanel({ missionName, rocketType, motorType, avionicType, message
         <Body1 block>{avionicType}</Body1>
       </div>
       <Label>Message:</Label>
-      <Textarea readOnly={true} value={message}></Textarea>
+      <Textarea
+        size='small'
+        readOnly={true}
+        value={message}
+        resize='vertical'
+      />
       <CompoundButton
         size='large'
         appearance='primary'
