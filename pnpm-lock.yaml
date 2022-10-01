@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@fluentui/react': ^8.96.2
   '@fluentui/react-components': ^9.3.2
+  '@reactivex/rxjs': ^6.6.7
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
   '@testing-library/user-event': ^13.5.0
@@ -22,6 +23,7 @@ specifiers:
   react-scripts: 5.0.1
   rebass: ^4.0.7
   recharts: ^2.1.14
+  rxjs: ^7.5.7
   scheduler: ^0.23.0
   typescript: ^4.8.3
   web-vitals: ^2.1.4
@@ -29,6 +31,7 @@ specifiers:
 dependencies:
   '@fluentui/react': 8.96.2_5uumaiclxbdbzaqafclbf6maf4
   '@fluentui/react-components': 9.3.2_utlxpjbiz3hugrg7et7ecmybbu
+  '@reactivex/rxjs': 6.6.7
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 13.5.0_znccgeejomvff3jrsk3ljovfpu
@@ -48,6 +51,7 @@ dependencies:
   react-scripts: 5.0.1_qkk2h7iyrlo4uzewmb6meqitne
   rebass: 4.0.7_react@18.2.0
   recharts: 2.1.14_v2m5e27vhdewzwhryxwfaorcca
+  rxjs: 7.5.7
   scheduler: 0.23.0
   typescript: 4.8.3
   web-vitals: 2.1.4
@@ -3234,6 +3238,13 @@ packages:
       leaflet: 1.9.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@reactivex/rxjs/6.6.7:
+    resolution: {integrity: sha512-xZIV2JgHhWoVPm3uVcFbZDRVJfx2hgqmuTX7J4MuKaZ+j5jN29agniCPBwrlCmpA15/zLKcPi7/bogt0ZwOFyA==}
+    engines: {npm: '>=2.0.0'}
+    dependencies:
+      tslib: 1.14.1
     dev: false
 
   /@rollup/plugin-babel/5.3.1_r56fldxoyazzliugjcx2ns4pma:
@@ -10180,6 +10191,12 @@ packages:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
       queue-microtask: 1.2.3
+    dev: false
+
+  /rxjs/7.5.7:
+    resolution: {integrity: sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==}
+    dependencies:
+      tslib: 2.4.0
     dev: false
 
   /safe-buffer/5.1.2:
