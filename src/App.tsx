@@ -1,100 +1,14 @@
 import { Card } from '@fluentui/react-components/unstable';
-import { useEffect, useState } from 'react';
 import { Flex, Box } from 'rebass';
 import Timer from './components/Timer';
 import ProgressBar from './components/ProgressBar';
 import DataVisualization from './components/DataVisualization';
 import MissionPanel from './components/MissionPanel';
 import ValueLabel from './components/ValueLabel';
-import GPSMap from './components/GPSMap';
-
-import weatherObservable from './services/WeatherProvider';
-
-interface AutoMapProps {
-  height: number
-}
-
-function AutoMap({ height }: AutoMapProps) {
-  const [position, setPosition] = useState({ lat: 0, long: 0 });
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => setPosition({
-        long: pos.coords.longitude,
-        lat: pos.coords.latitude
-      }))
-    }
-  }, [])
-  return <GPSMap height={height} latitude={position.lat} longitude={position.long} />
-}
-
-function WeatherLabel() {
-
-  const [weather, setWeather] = useState(0)
-
-  useEffect(() => {
-    const subscription = weatherObservable.subscribe((data: any) => setWeather(data.weather))
-    return () => subscription.unsubscribe()
-  }, [])
-
-  return (
-    <ValueLabel
-      labelColor='#6a975d'
-      labelName='Weather'
-      value={weather || 'Sunny'}
-    />
-  )
-}
-
-function TemperatureLabel() {
-
-  const [temperature, setTemperature] = useState(0)
-
-  useEffect(() => {
-    const subscription = weatherObservable.subscribe((data: any) => setTemperature(data.temperature))
-    return () => subscription.unsubscribe()
-  }, [])
-
-  return (
-    <ValueLabel
-      labelColor='#e39e7e'
-      labelName='Temperature'
-      unit='℃'
-      value={temperature}
-    />
-  )
-}
-
-function WindLabel() {
-
-  interface IWind {
-    speed: number;
-    direction: string;
-  }
-
-  const [wind, setWind] = useState<IWind>({ speed: 0, direction: "" })
-
-  useEffect(() => {
-    const subscription = weatherObservable.subscribe((data: any) => setWind({
-      speed: data.wind.speed,
-      direction: data.wind.direction
-    }))
-    return () => subscription.unsubscribe()
-  }, [])
-
-  return (
-    <ValueLabel
-      labelColor='#7eb4e3'
-      labelName='Wind'
-      unit={'knot ' + (wind.speed === 0 ? '' : wind.direction)}
-      value={wind.speed}
-    />
-  )
-}
+import { AutoMap } from './Map';
+import { WeatherLabel, TemperatureLabel, WindLabel } from './Weather';
 
 function App() {
-
-
   const cardHeight = window.innerHeight / 4;
   let data: any = [];
   for (let i = 0; i < 1000; i++) {
