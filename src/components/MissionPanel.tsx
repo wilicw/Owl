@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@fluentui/react-components/unstable';
 import {
   Title2,
@@ -19,23 +19,25 @@ interface MissionPanelProps {
   message: string;
 }
 
-function MissionPanel({ missionName, rocketType, motorType, avionicType, message }: MissionPanelProps) {
+function MissionPanel({
+  missionName, rocketType, motorType, avionicType, message,
+}: MissionPanelProps) {
   const [lock, setLock] = useState(true);
   const [launch, setLaunch] = useState(false);
 
   const launchProcess = () => {
-    setLaunch(true)
-  }
+    setLaunch(true);
+  };
 
   const abortProcess = () => {
-    setLock(true)
-    setLaunch(false)
-  }
+    setLock(true);
+    setLaunch(false);
+  };
 
   return (
     <Card>
       <div>
-        <Title2 block align='center'>{missionName}</Title2>
+        <Title2 block align="center">{missionName}</Title2>
         <Separator />
         <Subtitle1 block>Rocket Type</Subtitle1>
         <Body1 block>{rocketType}</Body1>
@@ -48,22 +50,22 @@ function MissionPanel({ missionName, rocketType, motorType, avionicType, message
       </div>
       <Label>Message:</Label>
       <Textarea
-        size='small'
-        readOnly={true}
+        size="small"
+        readOnly
         value={message}
-        resize='vertical'
+        resize="vertical"
       />
       <CompoundButton
-        size='large'
-        appearance='primary'
-        style={{ backgroundColor: launch ? "#bc2f32" : "" }}
-        secondaryContent={lock ? "Unlock before launching" : ""}
+        size="large"
+        appearance="primary"
+        style={{ backgroundColor: launch ? '#bc2f32' : '' }}
+        secondaryContent={lock ? 'Unlock before launching' : ''}
         disabled={lock}
-        onClick={() => launch ? abortProcess() : launchProcess()}
+        onClick={() => (launch ? abortProcess() : launchProcess())}
       >
-        {launch ? "Abort" : "Launch"}
+        {launch ? 'Abort' : 'Launch'}
       </CompoundButton>
-      <Button onClick={() => setLock(!lock)} disabled={launch}>{lock ? "Unlock" : "Lock"}</Button>
+      <Button onClick={() => setLock(!lock)} disabled={launch}>{lock ? 'Unlock' : 'Lock'}</Button>
     </Card>
   );
 }

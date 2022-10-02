@@ -7,7 +7,14 @@ interface ValueLabelProps {
   value?: number | string;
 }
 
-function ValueLabel({ labelName, labelColor, unit, value }: ValueLabelProps) {
+const defaultProps = {
+  unit: '',
+  value: '',
+};
+
+function ValueLabel({
+  labelName, labelColor, unit, value,
+}: ValueLabelProps) {
   return (
     <div style={{
       display: 'flex',
@@ -15,14 +22,14 @@ function ValueLabel({ labelName, labelColor, unit, value }: ValueLabelProps) {
       marginRight: '1em',
       marginTop: '.5em',
       marginBottom: '.5em',
-    }}>
+    }}
+    >
       <Badge
-        shape='rounded'
+        shape="rounded"
         style={{
-          backgroundColor: labelColor
+          backgroundColor: labelColor,
         }}
-      >
-      </Badge>
+      />
       <Text style={{ marginLeft: 3, whiteSpace: 'nowrap' }}>
         <b>{labelName}</b>
         <span style={{ marginLeft: 5 }}>{value}</span>
@@ -31,5 +38,7 @@ function ValueLabel({ labelName, labelColor, unit, value }: ValueLabelProps) {
     </div>
   );
 }
+
+ValueLabel.defaultProps = defaultProps;
 
 export default ValueLabel;
