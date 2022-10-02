@@ -4,6 +4,7 @@ import { WeatherLabel, TemperatureLabel, WindLabel } from 'Weather';
 import DataVisualization from 'components/DataVisualization';
 import MissionPanel from 'components/MissionPanel';
 import AutoMap from 'Map';
+import { AltitudeChart } from 'Chart';
 import Timer from './components/Timer';
 import ProgressBar from './components/ProgressBar';
 import ValueLabel from './components/ValueLabel';
@@ -98,13 +99,7 @@ function App() {
         width={[1, 1, 1, 1 / 4]}
       >
         <Box p={2} width={1}>
-          <DataVisualization
-            color="#1D7874"
-            chartName="Altitude"
-            unit="m"
-            data={data}
-            height={cardHeight}
-          />
+          <AltitudeChart height={cardHeight} />
         </Box>
         <Box p={2} width={1}>
           <DataVisualization

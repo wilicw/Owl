@@ -4,17 +4,12 @@ import {
 import { Card } from '@fluentui/react-components/unstable';
 import { Subtitle2, Text } from '@fluentui/react-components';
 
-interface DataVisual {
-  time: number;
-  value: number;
-}
-
 interface DataVisualProps {
   color: string;
   height: number;
   chartName: string;
   unit: string;
-  data: [DataVisual];
+  data: any[];
 }
 
 function DataVisualization({
