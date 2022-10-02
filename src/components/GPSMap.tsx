@@ -14,9 +14,11 @@ function GPSMap({ height, latitude, longitude }: GPSMapProps) {
         zoomControl={false}
         key={JSON.stringify([latitude, longitude])}
         center={[latitude, longitude]}
-        zoom={13}
-        maxZoom={15}
+        zoom={15}
       >
+        <TileLayer
+          url="https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png"
+        />
         <TileLayer
           url="https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}@2x.png"
         />
