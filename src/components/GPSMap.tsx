@@ -14,6 +14,7 @@ function GPSMap({ height, latitude, longitude }: GPSMapProps) {
         zoomControl={false}
         key={JSON.stringify([latitude, longitude])}
         center={[latitude, longitude]}
+        attributionControl={false}
         zoom={15}
       >
         <TileLayer
