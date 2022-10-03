@@ -1,5 +1,5 @@
 import {
-  filter, map, mergeMap, Observable, share, tap,
+  filter, map, mergeMap, Observable, share,
 } from 'rxjs';
 import connectionObservable from './ConnectionProvider';
 
@@ -12,7 +12,7 @@ enum MessageType {
 
 interface Message {
   type: string;
-  value: any;
+  value: string[][];
 }
 
 interface GeneralSensorMessage extends Message {
@@ -61,7 +61,6 @@ const velocityObservable: Observable<GeneralSensorMessage> = messageObservable.p
 );
 
 const accelerationObservable: Observable<GeneralSensorMessage> = messageObservable.pipe(
-  tap(console.log),
   filter((message) => message.type === MessageType.Acceleration),
   map(generalSensorParser),
 );

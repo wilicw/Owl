@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import ValueLabel from 'components/ValueLabel';
 import weatherObservable from 'services/WeatherProvider';
+import { IWind } from 'interfaces/IWeather';
 
 function WeatherLabel() {
-  const [weather, setWeather] = useState(undefined);
+  const [weather, setWeather] = useState<string | undefined>(undefined);
   useEffect(() => {
-    const subscription = weatherObservable.subscribe((data: any) => setWeather(data.weather));
+    const subscription = weatherObservable.subscribe((data) => setWeather(data.weather));
     return () => subscription.unsubscribe();
   }, []);
   return (
@@ -24,7 +25,7 @@ function TemperatureLabel() {
   const [temperature, setTemperature] = useState(NaN);
   useEffect(() => {
     const subscription = weatherObservable
-      .subscribe((data: any) => setTemperature(data.temperature));
+      .subscribe((data) => setTemperature(data.temperature));
     return () => subscription.unsubscribe();
   }, []);
   return (
@@ -41,14 +42,10 @@ function TemperatureLabel() {
 }
 
 function WindLabel() {
-  interface IWind {
-    speed: number;
-    direction: string;
-  }
   const [wind, setWind] = useState<IWind>({ speed: NaN, direction: '' });
   useEffect(() => {
     const subscription = weatherObservable
-      .subscribe((data: any) => setWind({
+      .subscribe((data) => setWind({
         speed: data.wind.speed,
         direction: data.wind.direction,
       }));

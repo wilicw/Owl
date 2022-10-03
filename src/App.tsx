@@ -13,7 +13,7 @@ import ValueLabel from './components/ValueLabel';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
-  const data: any = [];
+  const data = [];
   for (let i = 0; i < 1000; i++) {
     data.push({
       time: i,

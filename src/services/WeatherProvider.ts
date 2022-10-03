@@ -1,17 +1,20 @@
+// import { IWeather } from 'interfaces/IWeather';
+import { IWeather } from 'interfaces/IWeather';
 import {
-  filter, mergeMap, share, switchMap, timer,
+  filter, mergeMap, share, switchMap, timer, from, Observable,
 } from 'rxjs';
 
 const weatherApi = 'https://volmet.wilicw.dev/metar.json';
 
-const weatherObservable = timer(0, 20 * 1000).pipe(
+const weatherObservable: Observable<IWeather> = timer(0, 20 * 1000).pipe(
   switchMap(() => fetch(weatherApi)),
   filter((response) => response.status === 200),
   mergeMap(async (response) => {
     const docs = await response.json();
     return docs;
   }),
-  mergeMap((x) => x.filter((data: any) => data.station === 'RCNN')),
+  switchMap((x) => <Observable<IWeather>>from(x)),
+  filter((x) => x.station === 'RCNN'),
   share(),
 );
 

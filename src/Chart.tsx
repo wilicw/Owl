@@ -1,3 +1,4 @@
+import IDataVisual from 'interfaces/IDataVisual';
 import { useState, useEffect } from 'react';
 import DataVisualization from './components/DataVisualization';
 import {
@@ -10,7 +11,7 @@ interface ChartProps {
 }
 
 function AltitudeChart({ height }: ChartProps) {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<IDataVisual[]>([]);
 
   useEffect(() => {
     const subscription = altitudeObservable.subscribe((x) => {
@@ -33,7 +34,7 @@ function AltitudeChart({ height }: ChartProps) {
 }
 
 function AccelerationChart({ height }: ChartProps) {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<IDataVisual[]>([]);
 
   useEffect(() => {
     const subscription = accelerationObservable.subscribe((x) => {
@@ -56,7 +57,7 @@ function AccelerationChart({ height }: ChartProps) {
 }
 
 function TemperatureChart({ height }: ChartProps) {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<IDataVisual[]>([]);
 
   useEffect(() => {
     const subscription = temperatureObservable.subscribe((x) => {
@@ -79,7 +80,7 @@ function TemperatureChart({ height }: ChartProps) {
 }
 
 function VelocityChart({ height }: ChartProps) {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<IDataVisual[]>([]);
 
   useEffect(() => {
     const subscription = velocityObservable.subscribe((x) => {

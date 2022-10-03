@@ -3,13 +3,14 @@ import {
 } from 'recharts';
 import { Card } from '@fluentui/react-components/unstable';
 import { Subtitle2, Text } from '@fluentui/react-components';
+import IDataVisual from 'interfaces/IDataVisual';
 
 interface DataVisualProps {
   color: string;
   height: number;
   chartName: string;
   unit: string;
-  data: any[];
+  data: IDataVisual[];
 }
 
 function DataVisualization({
