@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import messageObservable from 'services/MessageProvider';
 import DataVisualization from './components/DataVisualization';
+import {
+  temperatureObservable, altitudeObservable,
+  velocityObservable, accelerationObservable,
+} from './services/MessageProvider';
 
 interface ChartProps {
   height: number;
@@ -10,12 +13,11 @@ function AltitudeChart({ height }: ChartProps) {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    const subscription = messageObservable.subscribe((x) => {
+    const subscription = altitudeObservable.subscribe((x) => {
       setData(
-        (prev) => [...prev, { time: parseInt(x.value[0], 10), value: parseFloat(x.value[2]) }],
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
       );
     });
-    setData(data.concat([]));
     return () => subscription.unsubscribe();
   }, []);
 
@@ -30,5 +32,75 @@ function AltitudeChart({ height }: ChartProps) {
   );
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { AltitudeChart };
+function AccelerationChart({ height }: ChartProps) {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const subscription = accelerationObservable.subscribe((x) => {
+      setData(
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+      );
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return (
+    <DataVisualization
+      color="#45425A"
+      chartName="Acceleration"
+      unit="m/s²"
+      data={data}
+      height={height}
+    />
+  );
+}
+
+function TemperatureChart({ height }: ChartProps) {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const subscription = temperatureObservable.subscribe((x) => {
+      setData(
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+      );
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return (
+    <DataVisualization
+      color="#e65f5c"
+      chartName="Temperature"
+      unit="℃"
+      data={data}
+      height={height}
+    />
+  );
+}
+
+function VelocityChart({ height }: ChartProps) {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const subscription = velocityObservable.subscribe((x) => {
+      setData(
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+      );
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return (
+    <DataVisualization
+      color="#232e21"
+      chartName="Velocity"
+      unit="m/s"
+      data={data}
+      height={height}
+    />
+  );
+}
+
+export {
+  AltitudeChart, AccelerationChart, TemperatureChart, VelocityChart,
+};

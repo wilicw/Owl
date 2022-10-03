@@ -4,7 +4,9 @@ import { WeatherLabel, TemperatureLabel, WindLabel } from 'Weather';
 import DataVisualization from 'components/DataVisualization';
 import MissionPanel from 'components/MissionPanel';
 import AutoMap from 'Map';
-import { AltitudeChart } from 'Chart';
+import {
+  AccelerationChart, AltitudeChart, TemperatureChart, VelocityChart,
+} from 'Chart';
 import Timer from './components/Timer';
 import ProgressBar from './components/ProgressBar';
 import ValueLabel from './components/ValueLabel';
@@ -111,13 +113,7 @@ function App() {
           />
         </Box>
         <Box p={2} width={1}>
-          <DataVisualization
-            color="#e65f5c"
-            chartName="Temperature"
-            unit="℃"
-            data={data}
-            height={cardHeight}
-          />
+          <TemperatureChart height={cardHeight} />
         </Box>
       </Box>
       <Box
@@ -128,25 +124,13 @@ function App() {
             width={[1, 1, 1, 1 / 2]}
             p={2}
           >
-            <DataVisualization
-              color="#232e21"
-              chartName="Velocity"
-              unit="m/s"
-              data={data}
-              height={cardHeight}
-            />
+            <VelocityChart height={cardHeight} />
           </Box>
           <Box
             width={[1, 1, 1, 1 / 2]}
             p={2}
           >
-            <DataVisualization
-              color="#45425A"
-              chartName="Acceleration"
-              unit="m/s²"
-              data={data}
-              height={cardHeight}
-            />
+            <AccelerationChart height={cardHeight} />
           </Box>
           <Box
             width={[1, 1, 1, 1 / 2]}
