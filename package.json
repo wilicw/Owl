@@ -6,6 +6,7 @@
     "@fluentui/react": "^8.97.0",
     "@fluentui/react-components": "^9.3.2",
     "@reactivex/rxjs": "^6.6.7",
+    "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
