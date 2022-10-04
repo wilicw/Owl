@@ -25,7 +25,7 @@ const DataFormatter = (n: number) => {
   } else if (absN >= 1000) {
     buffer += `${(absN / 1000).toString()}K`;
   } else {
-    buffer += absN.toFixed(1);
+    buffer += absN.toString();
   }
   return buffer;
 };
