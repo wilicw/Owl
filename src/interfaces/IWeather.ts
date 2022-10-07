@@ -1,23 +1,20 @@
+import { ILocation } from './IPosition';
+
 interface ICloud {
   cloud: string;
   distance: number;
 }
 
 interface IWind {
-  direction: string;
+  direction: number;
   speed: number;
 }
 
 interface IWeather {
   station: string;
   temperature: number;
-  time: number;
   wind: IWind;
-  visibility: number;
-  dew: number;
-  pressure: number;
-  sky: ICloud[],
-  weather: string;
+  location: ILocation;
 }
 
 export type { ICloud, IWeather, IWind };
