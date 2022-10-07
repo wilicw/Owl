@@ -1,12 +1,15 @@
 import { Card } from '@fluentui/react-components/unstable';
 import { Flex, Box } from 'rebass';
-import { WeatherLabel, TemperatureLabel, WindLabel } from 'Weather';
+import { TemperatureLabel, WindLabel } from 'Weather';
 import DataVisualization from 'components/DataVisualization';
 import MissionPanel from 'components/MissionPanel';
 import AutoMap from 'Map';
 import {
   AccelerationChart, AltitudeChart, TemperatureChart, VelocityChart,
 } from 'Chart';
+import locationObservable from 'services/LocationProvider';
+import { useDispatch } from 'react-redux';
+import { setLocation } from 'redux/reducer';
 import Timer from './components/Timer';
 import ProgressBar from './components/ProgressBar';
 import ValueLabel from './components/ValueLabel';
@@ -20,6 +23,11 @@ function App() {
       value: Math.sin(0.05 * i),
     });
   }
+
+  const dispatch = useDispatch();
+  locationObservable.subscribe((location) => {
+    dispatch(setLocation(location));
+  });
 
   return (
     <Flex flexWrap="wrap" mx={2} height="100vh">
@@ -93,7 +101,6 @@ function App() {
 
             <WindLabel />
             <TemperatureLabel />
-            <WeatherLabel />
           </div>
         </Card>
       </Box>

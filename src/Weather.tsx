@@ -1,30 +1,27 @@
 import { useEffect, useState } from 'react';
 import ValueLabel from 'components/ValueLabel';
 import weatherObservable from 'services/WeatherProvider';
-import { IWind } from 'interfaces/IWeather';
+import { IWeather, IWind } from 'interfaces/IWeather';
+import { Observable, share } from 'rxjs';
+import store from 'redux/store';
+import { distance } from 'interfaces/IPosition';
 
-function WeatherLabel() {
-  const [weather, setWeather] = useState<string | undefined>(undefined);
-  useEffect(() => {
-    const subscription = weatherObservable.subscribe((data) => setWeather(data.weather));
-    return () => subscription.unsubscribe();
-  }, []);
-  return (
-    weather === undefined ? null
-      : (
-        <ValueLabel
-          labelColor="#6a975d"
-          labelName="Weather"
-          value={weather || 'Sunny'}
-        />
-      )
-  );
-}
+const nearWeatherObservable = new Observable<IWeather>((subscriber) => {
+  weatherObservable.subscribe((weatherData) => {
+    const { location } = store.getState().app;
+    const { weather } = weatherData.reduce((current, data) => {
+      const d = distance(data.location, location);
+      if (d < current.distance) return { distance: d, weather: data };
+      return current;
+    }, { distance: Number.MAX_VALUE, weather: weatherData[0] });
+    subscriber.next(weather);
+  });
+}).pipe(share());
 
 function TemperatureLabel() {
   const [temperature, setTemperature] = useState(NaN);
   useEffect(() => {
-    const subscription = weatherObservable
+    const subscription = nearWeatherObservable
       .subscribe((data) => setTemperature(data.temperature));
     return () => subscription.unsubscribe();
   }, []);
@@ -42,9 +39,9 @@ function TemperatureLabel() {
 }
 
 function WindLabel() {
-  const [wind, setWind] = useState<IWind>({ speed: NaN, direction: '' });
+  const [wind, setWind] = useState<IWind>({ speed: NaN, direction: NaN });
   useEffect(() => {
-    const subscription = weatherObservable
+    const subscription = nearWeatherObservable
       .subscribe((data) => setWind({
         speed: data.wind.speed,
         direction: data.wind.direction,
@@ -57,11 +54,11 @@ function WindLabel() {
         <ValueLabel
           labelColor="#7eb4e3"
           labelName="Wind"
-          unit={`knot ${wind.speed === 0 ? '' : wind.direction}`}
+          unit={`knot ${(wind.speed === 0) ? '' : `${wind.direction}°`}`}
           value={wind.speed}
         />
       )
   );
 }
 
-export { WeatherLabel, TemperatureLabel, WindLabel };
+export { TemperatureLabel, WindLabel };
