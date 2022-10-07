@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Card } from '@fluentui/react-components/unstable';
 import {
   Title2,
@@ -10,6 +9,10 @@ import {
   Button,
 } from '@fluentui/react-components';
 import { Separator } from '@fluentui/react/lib/Separator';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  abort, lock, unlock, launch,
+} from 'redux/reducer';
 
 interface MissionPanelProps {
   missionName: string;
@@ -22,17 +25,9 @@ interface MissionPanelProps {
 function MissionPanel({
   missionName, rocketType, motorType, avionicType, message,
 }: MissionPanelProps) {
-  const [lock, setLock] = useState(true);
-  const [launch, setLaunch] = useState(false);
-
-  const launchProcess = () => {
-    setLaunch(true);
-  };
-
-  const abortProcess = () => {
-    setLock(true);
-    setLaunch(false);
-  };
+  const dispatch = useDispatch();
+  const isLock = useSelector((state: any) => state.app.lock);
+  const isLaunch = useSelector((state: any) => state.app.launched);
 
   return (
     <Card>
@@ -58,14 +53,14 @@ function MissionPanel({
       <CompoundButton
         size="large"
         appearance="primary"
-        style={{ backgroundColor: launch ? '#bc2f32' : '' }}
-        secondaryContent={lock ? 'Unlock before launching' : ''}
-        disabled={lock}
-        onClick={() => (launch ? abortProcess() : launchProcess())}
+        style={{ backgroundColor: isLaunch ? '#bc2f32' : '' }}
+        secondaryContent={isLock ? 'Unlock before launching' : ''}
+        disabled={isLock}
+        onClick={() => dispatch(isLaunch ? abort() : launch())}
       >
-        {launch ? 'Abort' : 'Launch'}
+        {isLaunch ? 'Abort' : 'Launch'}
       </CompoundButton>
-      <Button onClick={() => setLock(!lock)} disabled={launch}>{lock ? 'Unlock' : 'Lock'}</Button>
+      <Button onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</Button>
     </Card>
   );
 }

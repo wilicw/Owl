@@ -7,6 +7,7 @@ interface IState {
   avionic: string;
   version: string;
   launched: boolean;
+  lock: boolean;
   location: ILocation;
 }
 
@@ -20,14 +21,25 @@ const initialState: IState = {
     longitude: NaN,
   },
   launched: false,
+  lock: true,
 };
 
 const appReducer = createSlice({
   name: 'appReducer',
   initialState,
   reducers: {
-    launch: (state: IState, action) => {
-      state.launched = action.payload;
+    unlock: (state: IState) => {
+      state.lock = false;
+    },
+    lock: (state: IState) => {
+      state.lock = true;
+    },
+    launch: (state: IState) => {
+      if (!state.lock) state.launched = true;
+    },
+    abort: (state: IState) => {
+      state.lock = true;
+      state.launched = false;
     },
     setLocation: (state: IState, action) => {
       state.location = action.payload;
@@ -35,5 +47,7 @@ const appReducer = createSlice({
   },
 });
 
-export const { launch, setLocation } = appReducer.actions;
+export const {
+  unlock, lock, launch, setLocation, abort,
+} = appReducer.actions;
 export default appReducer.reducer;
