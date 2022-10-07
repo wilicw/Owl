@@ -16,8 +16,8 @@ const initialState: IState = {
   avionic: '',
   version: '0.0.0',
   location: {
-    latitude: 0,
-    longitude: 0,
+    latitude: NaN,
+    longitude: NaN,
   },
   launched: false,
 };

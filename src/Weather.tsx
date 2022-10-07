@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import ValueLabel from 'components/ValueLabel';
 import weatherObservable from 'services/WeatherProvider';
 import { IWeather, IWind } from 'interfaces/IWeather';
-import { Observable, share } from 'rxjs';
+import { Observable, retry, share } from 'rxjs';
 import store from 'redux/store';
 import { distance } from 'interfaces/IPosition';
 
 const nearWeatherObservable = new Observable<IWeather>((subscriber) => {
   weatherObservable.subscribe((weatherData) => {
     const { location } = store.getState().app;
+    if (Number.isNaN(location.latitude) || Number.isNaN(location.longitude)) subscriber.error();
     const { weather } = weatherData.reduce((current, data) => {
       const d = distance(data.location, location);
       if (d < current.distance) return { distance: d, weather: data };
@@ -16,7 +17,10 @@ const nearWeatherObservable = new Observable<IWeather>((subscriber) => {
     }, { distance: Number.MAX_VALUE, weather: weatherData[0] });
     subscriber.next(weather);
   });
-}).pipe(share());
+}).pipe(
+  retry({ delay: 1000 }),
+  share(),
+);
 
 function TemperatureLabel() {
   const [temperature, setTemperature] = useState(NaN);
