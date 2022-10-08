@@ -1,12 +1,12 @@
 import GPSMap from 'components/GPSMap';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'redux/hook';
 
 interface AutoMapProps {
   height: number
 }
 
 function AutoMap({ height }: AutoMapProps) {
-  const position = useSelector((state: any) => state.app.location);
+  const position = useAppSelector((state) => state.app.location);
   return <GPSMap height={height} latitude={position.latitude} longitude={position.longitude} />;
 }
 

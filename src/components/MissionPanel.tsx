@@ -9,7 +9,7 @@ import {
   Button,
 } from '@fluentui/react-components';
 import { Separator } from '@fluentui/react/lib/Separator';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from 'redux/hook';
 import {
   abort, lock, unlock, launch,
 } from 'redux/reducer';
@@ -25,9 +25,9 @@ interface MissionPanelProps {
 function MissionPanel({
   missionName, rocketType, motorType, avionicType, message,
 }: MissionPanelProps) {
-  const dispatch = useDispatch();
-  const isLock = useSelector((state: any) => state.app.lock);
-  const isLaunch = useSelector((state: any) => state.app.launched);
+  const dispatch = useAppDispatch();
+  const isLock = useAppSelector((state) => state.app.lock);
+  const isLaunch = useAppSelector((state) => state.app.launched);
 
   return (
     <Card>
