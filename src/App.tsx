@@ -10,6 +10,7 @@ import {
 import locationObservable from 'services/LocationProvider';
 import { useDispatch } from 'react-redux';
 import { setLocation } from 'redux/reducer';
+import AvionicConnectionLabel from 'ConnectionLabel';
 import Timer from './components/Timer';
 import ProgressBar from './components/ProgressBar';
 import ValueLabel from './components/ValueLabel';
@@ -64,12 +65,6 @@ function App() {
 
             <ValueLabel
               labelColor="#555"
-              labelName="Avionic Status"
-              value="RUNNING"
-            />
-
-            <ValueLabel
-              labelColor="#555"
               labelName="Reaction Wheel"
               unit="rpm"
               value={530}
@@ -100,6 +95,7 @@ function App() {
               value="IDLE"
             />
 
+            <AvionicConnectionLabel />
             <WindLabel />
             <TemperatureLabel />
           </div>

@@ -10,6 +10,7 @@ interface IState {
   lock: boolean;
   location: ILocation;
   time: number;
+  connect: boolean;
 }
 
 const initialTime = -10 * 1000;
@@ -26,6 +27,7 @@ const initialState: IState = {
   },
   launched: false,
   lock: true,
+  connect: false,
 };
 
 const appReducer = createSlice({
@@ -56,10 +58,13 @@ const appReducer = createSlice({
       state.launched = false;
       state.lock = true;
     },
+    setConnection: (state: IState, action) => {
+      state.connect = action.payload;
+    },
   },
 });
 
 export const {
-  unlock, lock, launch, setLocation, abort, setTime, stop,
+  unlock, lock, launch, setLocation, abort, setTime, stop, setConnection,
 } = appReducer.actions;
 export default appReducer.reducer;
