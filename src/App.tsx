@@ -20,7 +20,8 @@ function App() {
   for (let i = 0; i < 1000; i++) {
     data.push({
       time: i,
-      value: Math.sin(0.05 * i),
+      sin: Math.sin(0.005 * i),
+      cos: Math.cos(0.005 * i),
     });
   }
 
@@ -112,7 +113,8 @@ function App() {
         </Box>
         <Box p={2} width={1}>
           <DataVisualization
-            color="#28536b"
+            colors={['#28536b', '#DD9787']}
+            keys={['sin', 'cos']}
             chartName="GYRO"
             unit="m"
             data={data}

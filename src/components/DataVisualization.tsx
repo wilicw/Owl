@@ -4,13 +4,15 @@ import {
 import { Card } from '@fluentui/react-components/unstable';
 import { Spinner, Subtitle2, Text } from '@fluentui/react-components';
 import IDataVisual from 'interfaces/IDataVisual';
+import _ from 'lodash';
 
 interface DataVisualProps {
-  color: string;
   height: number;
   chartName: string;
   unit: string;
   data: IDataVisual[];
+  colors: string[];
+  keys: string[];
 }
 
 const DataFormatter = (n: number) => {
@@ -31,9 +33,9 @@ const DataFormatter = (n: number) => {
 };
 
 function DataVisualization({
-  color, height, chartName, unit, data,
+  colors, height, chartName, unit, data, keys,
 }: DataVisualProps) {
-  const displayedValue: string = (data.length ? data[data.length - 1].value : 0).toFixed(4);
+  const displayedValue: string = keys.length === 1 ? (data.length ? data[data.length - 1][keys[0]] : 0).toFixed(4) : '';
   return (
     <Card
       style={{
@@ -53,12 +55,18 @@ function DataVisualization({
         <Subtitle2>
           {chartName}
         </Subtitle2>
-        <Subtitle2 style={{ float: 'right', marginLeft: 2 }}>
-          {unit}
-        </Subtitle2>
-        <Subtitle2 style={{ float: 'right' }}>
-          {displayedValue}
-        </Subtitle2>
+        {
+        keys.length === 1 ? (
+          <>
+            <Subtitle2 style={{ float: 'right', marginLeft: 2 }}>
+              {unit}
+            </Subtitle2>
+            <Subtitle2 style={{ float: 'right' }}>
+              {displayedValue}
+            </Subtitle2>
+          </>
+        ) : null
+      }
       </Text>
       {
         data.length ? (
@@ -69,7 +77,9 @@ function DataVisualization({
                 top: 0, bottom: 0, left: 0, right: 12,
               }}
             >
-              <Line type="monotone" dataKey="value" stroke={color} dot={false} />
+              { _.zip(keys, colors).map(([key, color]) => (
+                <Line type="monotone" dataKey={key} stroke={color} dot={false} />
+              ))}
               <CartesianGrid stroke="#ccc" />
               <XAxis dataKey="time" allowDecimals={false} type="number" domain={[0, 'dataMax']} tickFormatter={DataFormatter} />
               <YAxis tickFormatter={DataFormatter} width={40} />

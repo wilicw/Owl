@@ -24,7 +24,8 @@ function AltitudeChart({ height }: ChartProps) {
 
   return (
     <DataVisualization
-      color="#1D7874"
+      colors={['#1D7874']}
+      keys={['value']}
       chartName="Altitude"
       unit="m"
       data={data}
@@ -47,7 +48,8 @@ function AccelerationChart({ height }: ChartProps) {
 
   return (
     <DataVisualization
-      color="#45425A"
+      colors={['#45425A']}
+      keys={['value']}
       chartName="Acceleration"
       unit="m/s²"
       data={data}
@@ -70,7 +72,8 @@ function TemperatureChart({ height }: ChartProps) {
 
   return (
     <DataVisualization
-      color="#e65f5c"
+      colors={['#e65f5c']}
+      keys={['value']}
       chartName="Temperature"
       unit="℃"
       data={data}
@@ -93,7 +96,8 @@ function VelocityChart({ height }: ChartProps) {
 
   return (
     <DataVisualization
-      color="#232e21"
+      colors={['#232e21']}
+      keys={['value']}
       chartName="Velocity"
       unit="m/s"
       data={data}

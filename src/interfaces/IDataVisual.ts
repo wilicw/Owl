@@ -1,6 +1,6 @@
   interface IDataVisual {
   time: number;
-  value: number;
+  [propName: string]: number;
 }
 
 export default IDataVisual;
