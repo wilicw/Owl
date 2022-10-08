@@ -10,6 +10,7 @@ specifiers:
   '@testing-library/user-event': ^14.4.3
   '@types/jest': ^29.1.1
   '@types/leaflet': ^1.8.0
+  '@types/lodash': ^4.14.186
   '@types/node': ^18.7.23
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
@@ -25,6 +26,7 @@ specifiers:
   eslint-plugin-react: ^7.31.8
   eslint-plugin-react-hooks: ^4.6.0
   leaflet: ^1.9.1
+  lodash: ^4.17.21
   react: ^18.2.0
   react-dom: ^18.2.0
   react-leaflet: ^4.1.0
@@ -47,6 +49,7 @@ dependencies:
   '@testing-library/user-event': 14.4.3_znccgeejomvff3jrsk3ljovfpu
   '@types/jest': 29.1.1
   '@types/leaflet': 1.8.0
+  '@types/lodash': 4.14.186
   '@types/node': 18.7.23
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
@@ -62,6 +65,7 @@ dependencies:
   eslint-plugin-react: 7.31.8_eslint@8.24.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.24.0
   leaflet: 1.9.1
+  lodash: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-leaflet: 4.1.0_6yalbjtj7k4yykioxumfwzwadm
@@ -3861,6 +3865,10 @@ packages:
     resolution: {integrity: sha512-+sXFmiJTFdhaXXIGFlV5re9AdqtAODoXbGAvxx02e5SHXL3ir7ClP5J7pahO8VmzKY3dth4RUS1nf2BTT+DW1A==}
     dependencies:
       '@types/geojson': 7946.0.10
+    dev: false
+
+  /@types/lodash/4.14.186:
+    resolution: {integrity: sha512-eHcVlLXP0c2FlMPm56ITode2AgLMSa6aJ05JTTbYbI+7EMkCEE5qk2E41d5g2lCVTqRe0GnnRFurmlCsDODrPw==}
     dev: false
 
   /@types/mime/3.0.1:
