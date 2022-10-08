@@ -35,7 +35,7 @@ function App() {
       <Box
         width={[1, 1, 1 / 2, 1 / 4]}
       >
-        <Timer refTime={38.38587} />
+        <Timer />
       </Box>
       <Box
         width={[1, 1, 1 / 2, 3 / 4]}

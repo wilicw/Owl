@@ -1,10 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-import appReducer from './reducer';
+import countDownObservable from 'services/TimeProvider';
+import appReducer, { setTime } from './reducer';
 
 const store = configureStore({
   reducer: {
     app: appReducer,
   },
+});
+
+countDownObservable.subscribe(() => {
+  if (store.getState().app.launched) {
+    const now = store.getState().app.time + 100;
+    store.dispatch(setTime(now));
+  }
 });
 
 export default store;

@@ -11,7 +11,7 @@ import {
 import { Separator } from '@fluentui/react/lib/Separator';
 import { useAppDispatch, useAppSelector } from 'redux/hook';
 import {
-  abort, lock, unlock, launch,
+  abort, lock, unlock, launch, stop,
 } from 'redux/reducer';
 
 interface MissionPanelProps {
@@ -28,6 +28,7 @@ function MissionPanel({
   const dispatch = useAppDispatch();
   const isLock = useAppSelector((state) => state.app.lock);
   const isLaunch = useAppSelector((state) => state.app.launched);
+  const time = useAppSelector((state) => state.app.time);
 
   return (
     <Card>
@@ -50,17 +51,33 @@ function MissionPanel({
         value={message}
         resize="vertical"
       />
-      <CompoundButton
-        size="large"
-        appearance="primary"
-        style={{ backgroundColor: isLaunch ? '#bc2f32' : '' }}
-        secondaryContent={isLock ? 'Unlock before launching' : ''}
-        disabled={isLock}
-        onClick={() => dispatch(isLaunch ? abort() : launch())}
-      >
-        {isLaunch ? 'Abort' : 'Launch'}
-      </CompoundButton>
-      <Button onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</Button>
+      {
+      time > 0 ? (
+        <>
+          <CompoundButton
+            size="large"
+            appearance="primary"
+          >
+            Parachute Deploy
+          </CompoundButton>
+          <Button onClick={() => dispatch(stop())}>Stop</Button>
+        </>
+      ) : (
+        <>
+          <CompoundButton
+            size="large"
+            appearance="primary"
+            style={{ backgroundColor: isLaunch ? '#bc2f32' : '' }}
+            secondaryContent={isLock ? 'Unlock before launching' : ''}
+            disabled={isLock}
+            onClick={() => dispatch(isLaunch ? abort() : launch())}
+          >
+            {isLaunch ? 'Abort' : 'Launch'}
+          </CompoundButton>
+          <Button onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</Button>
+        </>
+      )
+    }
     </Card>
   );
 }

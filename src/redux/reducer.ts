@@ -9,9 +9,13 @@ interface IState {
   launched: boolean;
   lock: boolean;
   location: ILocation;
+  time: number;
 }
 
+const initialTime = -10 * 1000;
+
 const initialState: IState = {
+  time: initialTime,
   rocket: '',
   motor: '',
   avionic: '',
@@ -35,19 +39,27 @@ const appReducer = createSlice({
       state.lock = true;
     },
     launch: (state: IState) => {
-      if (!state.lock) state.launched = true;
+      if (!state.lock) { state.launched = true; }
     },
     abort: (state: IState) => {
       state.lock = true;
       state.launched = false;
+      state.time = initialTime;
     },
     setLocation: (state: IState, action) => {
       state.location = action.payload;
+    },
+    setTime: (state: IState, action) => {
+      state.time = action.payload;
+    },
+    stop: (state: IState) => {
+      state.launched = false;
+      state.lock = true;
     },
   },
 });
 
 export const {
-  unlock, lock, launch, setLocation, abort,
+  unlock, lock, launch, setLocation, abort, setTime, stop,
 } = appReducer.actions;
 export default appReducer.reducer;

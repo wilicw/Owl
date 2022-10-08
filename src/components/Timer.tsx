@@ -1,34 +1,50 @@
 import { useState, useEffect } from 'react';
 import { Card } from '@fluentui/react-components/unstable';
 import { LargeTitle, Title2, Text } from '@fluentui/react-components';
-
-interface TimerProps {
-  refTime: number;
-}
+import { useAppSelector } from 'redux/hook';
 
 const currentTime = () => new Date().toUTCString();
 
-function Timer({ refTime }: TimerProps) {
+function UTCTimer() {
   const [displayTime, setDisplayTime] = useState(currentTime);
-
   useEffect(() => {
     setInterval(() => {
       setDisplayTime(() => currentTime());
-    }, 100);
+    }, 1000);
   }, []);
+  return <Text>{displayTime}</Text>;
+}
 
-  const padding = String(refTime.toFixed(0)).padStart(3, '0');
-  const floating = (refTime - parseInt(padding, 10)).toFixed(1).slice(1);
+function Timer() {
+  const refTime = useAppSelector((state) => state.app.time);
+  const isLaunch = useAppSelector((state) => state.app.launched);
+
+  let timerColor = '#bbb';
+  if (isLaunch) {
+    if (refTime < 0) timerColor = '#bc2f32';
+    else timerColor = 'green';
+  }
+
+  const refTimerString = Math.abs(refTime / 1000).toFixed(1).split('.');
+  const padding = refTimerString[0].padStart(3, '0');
+  const floating = refTimerString[1];
 
   return (
     <Card appearance="subtle">
-      <Text>{displayTime}</Text>
-      <Text align="center">
-        <LargeTitle block={false}>
-          T+
+      <UTCTimer />
+      <Text
+        align="center"
+        style={{
+          color: timerColor,
+        }}
+      >
+        <LargeTitle block={false} style={{ fontFamily: 'monospace' }}>
+          T
+          {refTime < 0 ? '-' : '+'}
           {padding}
         </LargeTitle>
-        <Title2 block={false}>
+        <Title2 block={false} style={{ fontFamily: 'monospace' }}>
+          .
           {floating}
           s
         </Title2>
