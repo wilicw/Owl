@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@fluentui/react': ^8.97.0
   '@fluentui/react-components': ^9.3.2
+  '@fluentui/react-hooks': ^8.6.11
   '@reactivex/rxjs': ^6.6.7
   '@reduxjs/toolkit': ^1.8.5
   '@testing-library/jest-dom': ^5.16.5
@@ -43,6 +44,7 @@ specifiers:
 dependencies:
   '@fluentui/react': 8.97.0_5uumaiclxbdbzaqafclbf6maf4
   '@fluentui/react-components': 9.3.2_utlxpjbiz3hugrg7et7ecmybbu
+  '@fluentui/react-hooks': 8.6.11_iapumuv4e6jcjznwuxpf4tt22e
   '@reactivex/rxjs': 6.6.7
   '@reduxjs/toolkit': 1.8.5_kuo2ie247izvzll3jejufdtq3q
   '@testing-library/jest-dom': 5.16.5

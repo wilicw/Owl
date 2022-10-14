@@ -5,9 +5,7 @@ import {
 } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 
-const avionicIP = 'localhost';
-const avionicPort = 8787;
-const avionicURI = `ws://${avionicIP}:${avionicPort}`;
+const avionicURI = store.getState().app.wsURL;
 
 const ws = webSocket({
   url: avionicURI,

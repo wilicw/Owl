@@ -5,6 +5,7 @@
   "dependencies": {
     "@fluentui/react": "^8.97.0",
     "@fluentui/react-components": "^9.3.2",
+    "@fluentui/react-hooks": "^8.6.11",
     "@reactivex/rxjs": "^6.6.7",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",

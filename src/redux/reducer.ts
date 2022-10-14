@@ -11,6 +11,7 @@ interface IState {
   location: ILocation;
   time: number;
   connect: boolean;
+  wsURL: string;
 }
 
 const initialTime = -10 * 1000;
@@ -28,6 +29,7 @@ const initialState: IState = {
   launched: false,
   lock: true,
   connect: false,
+  wsURL: localStorage.getItem('wsURL') || 'ws://127.0.0.1:81',
 };
 
 const appReducer = createSlice({
@@ -61,10 +63,14 @@ const appReducer = createSlice({
     setConnection: (state: IState, action) => {
       state.connect = action.payload;
     },
+    setWSURL: (state: IState, action) => {
+      state.wsURL = action.payload;
+      localStorage.setItem('wsURL', action.payload);
+    },
   },
 });
 
 export const {
-  unlock, lock, launch, setLocation, abort, setTime, stop, setConnection,
+  unlock, lock, launch, setLocation, abort, setTime, stop, setConnection, setWSURL,
 } = appReducer.actions;
 export default appReducer.reducer;

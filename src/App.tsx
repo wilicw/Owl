@@ -11,6 +11,7 @@ import locationObservable from 'services/LocationProvider';
 import { useDispatch } from 'react-redux';
 import { setLocation } from 'redux/reducer';
 import AvionicConnectionLabel from 'ConnectionLabel';
+import ConnectionConfig from 'components/ConnectionConfig';
 import Timer from './components/Timer';
 import ProgressBar from './components/ProgressBar';
 import ValueLabel from './components/ValueLabel';
@@ -156,6 +157,7 @@ function App() {
           avionicType="ESP8266"
           message="<< TYPE,THRUST;IGN,0;CAMERA,0;LOAD,0;"
         />
+        <ConnectionConfig />
       </Box>
       <Box
         width={1}
