@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import ValueLabel from 'components/ValueLabel';
-import weatherObservable from 'services/WeatherProvider';
-import { IWeather, IWind } from 'interfaces/IWeather';
 import { Observable, retry, share } from 'rxjs';
-import store from 'redux/store';
-import { distance } from 'interfaces/IPosition';
+import ValueLabel from '@/components/ValueLabel';
+import weatherObservable from '@/services/WeatherProvider';
+import { IWeather, IWind } from '@/interfaces/IWeather';
+import store from '@/redux/store';
+import { distance } from '@/interfaces/IPosition';
 
 const nearWeatherObservable = new Observable<IWeather>((subscriber) => {
   weatherObservable.subscribe((weatherData) => {

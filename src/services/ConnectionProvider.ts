@@ -1,9 +1,9 @@
-import { setConnection } from 'redux/reducer';
-import store from 'redux/store';
 import {
   retry, share, catchError, throwError, map,
 } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
+import store from '@/redux/store';
+import { setConnection } from '@/redux/reducer';
 
 const avionicURI = store.getState().app.wsURL;
 

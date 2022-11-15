@@ -1,5 +1,5 @@
-import ValueLabel from 'components/ValueLabel';
-import { useAppSelector } from 'redux/hook';
+import ValueLabel from '@/components/ValueLabel';
+import { useAppSelector } from '@/redux/hook';
 
 function AvionicConnectionLabel() {
   const isConnect = useAppSelector((state) => state.app.connect);

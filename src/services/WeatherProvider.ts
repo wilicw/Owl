@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IWeather } from 'interfaces/IWeather';
 import {
   filter, mergeMap, share, switchMap, timer, Observable, map,
 } from 'rxjs';
+import { IWeather } from '@/interfaces/IWeather';
 
 const weatherApi = 'https://data.wilicw.dev/weather/auto.json';
 

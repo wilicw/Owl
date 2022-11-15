@@ -1,5 +1,5 @@
-import GPSMap from 'components/GPSMap';
-import { useAppSelector } from 'redux/hook';
+import GPSMap from '@/components/GPSMap';
+import { useAppSelector } from '@/redux/hook';
 
 interface AutoMapProps {
   height: number

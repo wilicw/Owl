@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ILocation } from 'interfaces/IPosition';
+import { ILocation } from '@/interfaces/IPosition';
 
 interface IState {
   rocket: string;

@@ -1,20 +1,19 @@
-import { Card } from '@fluentui/react-components/unstable';
+import Container from '@/style-components/Container';
 import { Flex, Box } from 'rebass';
-import { TemperatureLabel, WindLabel } from 'Weather';
-import DataVisualization from 'components/DataVisualization';
-import MissionPanel from 'components/MissionPanel';
-import AutoMap from 'Map';
+import { useDispatch } from 'react-redux';
+import AvionicConnectionLabel from '@/ConnectionLabel';
+import { setLocation } from '@/redux/reducer';
+import locationObservable from '@/services/LocationProvider';
 import {
   AccelerationChart, AltitudeChart, TemperatureChart, VelocityChart,
-} from 'Chart';
-import locationObservable from 'services/LocationProvider';
-import { useDispatch } from 'react-redux';
-import { setLocation } from 'redux/reducer';
-import AvionicConnectionLabel from 'ConnectionLabel';
-import ConnectionConfig from 'components/ConnectionConfig';
-import Timer from './components/Timer';
-import ProgressBar from './components/ProgressBar';
-import ValueLabel from './components/ValueLabel';
+} from '@/Chart';
+import AutoMap from '@/Map';
+import MissionPanel from '@/components/MissionPanel';
+import DataVisualization from '@/components/DataVisualization';
+import { TemperatureLabel, WindLabel } from '@/Weather';
+import Timer from '@/components/Timer';
+import ProgressBar from '@/components/ProgressBar';
+import ValueLabel from '@/components/ValueLabel';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
@@ -43,9 +42,7 @@ function App() {
         width={[1, 1, 1 / 2, 3 / 4]}
         p={2}
       >
-        <Card
-          appearance="subtle"
-        >
+        <Container>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -100,7 +97,7 @@ function App() {
             <WindLabel />
             <TemperatureLabel />
           </div>
-        </Card>
+        </Container>
       </Box>
       <Box
         width={[1, 1, 1, 1 / 4]}
@@ -157,7 +154,6 @@ function App() {
           avionicType="ESP8266"
           message="<< TYPE,THRUST;IGN,0;CAMERA,0;LOAD,0;"
         />
-        <ConnectionConfig />
       </Box>
       <Box
         width={1}

@@ -1,5 +1,5 @@
-import { ILocation } from 'interfaces/IPosition';
 import { Observable } from 'rxjs';
+import { ILocation } from '@/interfaces/IPosition';
 
 const locationObservable = new Observable<ILocation>((observer) => {
   navigator.geolocation.getCurrentPosition((position) => {

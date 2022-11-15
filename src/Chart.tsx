@@ -1,10 +1,10 @@
-import IDataVisual from 'interfaces/IDataVisual';
 import { useState, useEffect } from 'react';
-import DataVisualization from './components/DataVisualization';
+import IDataVisual from '@/interfaces/IDataVisual';
+import DataVisualization from '@/components/DataVisualization';
 import {
   temperatureObservable, altitudeObservable,
   velocityObservable, accelerationObservable,
-} from './services/MessageProvider';
+} from '@/services/MessageProvider';
 
 interface ChartProps {
   height: number;

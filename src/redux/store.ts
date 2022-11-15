@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import countDownObservable from 'services/TimeProvider';
+import countDownObservable from '@/services/TimeProvider';
 import appReducer, { setTime } from './reducer';
 
 const store = configureStore({
