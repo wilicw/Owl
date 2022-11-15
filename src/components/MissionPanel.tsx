@@ -1,18 +1,16 @@
-import { Card } from '@fluentui/react-components/unstable';
-import {
-  Title2,
-  Subtitle1,
-  Body1,
-  CompoundButton,
-  Textarea,
-  Label,
-  Button,
-} from '@fluentui/react-components';
-import { Separator } from '@fluentui/react/lib/Separator';
-import { useAppDispatch, useAppSelector } from 'redux/hook';
+import Card from '@/style-components/Card';
+import Text from '@/style-components/Text';
+// import {
+//   CompoundButton,
+//   Textarea,
+//   Label,
+//   Button,
+// } from '@fluentui/react-components';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import {
   abort, lock, unlock, launch, stop,
-} from 'redux/reducer';
+} from '@/redux/reducer';
+import Separator from '@/style-components/Separator';
 
 interface MissionPanelProps {
   missionName: string;
@@ -33,53 +31,43 @@ function MissionPanel({
   return (
     <Card>
       <div>
-        <Title2 block align="center">{missionName}</Title2>
+        <Text block blod align="center">{missionName}</Text>
         <Separator />
-        <Subtitle1 block>Rocket Type</Subtitle1>
-        <Body1 block>{rocketType}</Body1>
+        <Text block blod>Rocket Type</Text>
+        <Text block>{rocketType}</Text>
         <Separator />
-        <Subtitle1 block>Motor Type</Subtitle1>
-        <Body1 block>{motorType}</Body1>
+        <Text block blod>Motor Type</Text>
+        <Text block>{motorType}</Text>
         <Separator />
-        <Subtitle1 block>Avionic Type</Subtitle1>
-        <Body1 block>{avionicType}</Body1>
+        <Text block blod>Avionic Type</Text>
+        <Text block>{avionicType}</Text>
       </div>
-      <Label>Message:</Label>
-      <Textarea
-        size="small"
-        readOnly
-        value={message}
-        resize="vertical"
-      />
+      <Text>Message:</Text>
+      <textarea />
       {
       time > 0 ? (
         <>
-          <CompoundButton
-            size="large"
-            appearance="primary"
-          >
+          <button>
             Parachute Deploy
-          </CompoundButton>
-          <Button onClick={() => dispatch(stop())}>Stop</Button>
+          </button>
+          <button onClick={() => dispatch(stop())}>Stop</button>
         </>
       ) : (
         <>
-          <CompoundButton
-            size="large"
-            appearance="primary"
+          <button
             style={{ backgroundColor: isLaunch ? '#bc2f32' : '' }}
-            secondaryContent={isLock ? 'Unlock before launching' : ''}
             disabled={isLock}
             onClick={() => dispatch(isLaunch ? abort() : launch())}
           >
             {isLaunch ? 'Abort' : 'Launch'}
-          </CompoundButton>
-          <Button onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</Button>
+          </button>
+          <button onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</button>
         </>
       )
     }
     </Card>
   );
 }
+// secondaryContent={isLock ? 'Unlock before launching' : ''}
 
 export default MissionPanel;

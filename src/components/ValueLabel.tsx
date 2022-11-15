@@ -1,4 +1,5 @@
-import { Badge, Text } from '@fluentui/react-components';
+import Badge from '@/style-components/Badge';
+import Text from '@/style-components/Text';
 
 interface ValueLabelProps {
   labelName: string;
@@ -19,22 +20,17 @@ function ValueLabel({
     <div style={{
       display: 'flex',
       justifyContent: 'center',
-      marginRight: '1em',
+      marginRight: '.5em',
       marginTop: '.5em',
       marginBottom: '.5em',
     }}
     >
-      <Badge
-        shape="rounded"
-        style={{
-          backgroundColor: labelColor,
-        }}
-      />
-      <Text style={{ marginLeft: 3, whiteSpace: 'nowrap' }}>
-        <b>{labelName}</b>
+      <Badge color={labelColor} />
+      <div style={{ display: 'block', whiteSpace: 'nowrap' }}>
+        <Text blod>{labelName}</Text>
         <span style={{ marginLeft: 5 }}>{value}</span>
-        <Text size={200}>{unit}</Text>
-      </Text>
+        <Text>{unit}</Text>
+      </div>
     </div>
   );
 }

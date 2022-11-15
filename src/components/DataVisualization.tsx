@@ -1,10 +1,11 @@
 import {
   LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer,
 } from 'recharts';
-import { Card } from '@fluentui/react-components/unstable';
-import { Spinner, Subtitle2, Text } from '@fluentui/react-components';
-import IDataVisual from 'interfaces/IDataVisual';
+import Card from '@/style-components/Card';
+import Text from '@/style-components/Text';
 import _ from 'lodash';
+import IDataVisual from '@/interfaces/IDataVisual';
+import Waiting from './Waiting';
 
 interface DataVisualProps {
   height: number;
@@ -47,23 +48,21 @@ function DataVisualization({
         block
         style={{
           paddingLeft: 12,
-          paddingTop: 6,
           paddingRight: 12,
-          paddingBottom: 0,
         }}
       >
-        <Subtitle2>
+        <Text>
           {chartName}
-        </Subtitle2>
+        </Text>
         {
         keys.length === 1 ? (
           <>
-            <Subtitle2 style={{ float: 'right', marginLeft: 2 }}>
+            <Text style={{ float: 'right', marginLeft: 2 }}>
               {unit}
-            </Subtitle2>
-            <Subtitle2 style={{ float: 'right' }}>
+            </Text>
+            <Text style={{ float: 'right' }}>
               {displayedValue}
-            </Subtitle2>
+            </Text>
           </>
         ) : null
       }
@@ -85,7 +84,7 @@ function DataVisualization({
               <YAxis tickFormatter={DataFormatter} width={40} />
             </LineChart>
           </ResponsiveContainer>
-        ) : <Spinner style={{ height: '100%' }} label="Waiting Data..." />
+        ) : <Waiting />
       }
     </Card>
   );

@@ -1,6 +1,6 @@
-import { Spinner } from '@fluentui/react-components';
-import { Card } from '@fluentui/react-components/unstable';
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
+import Card from '@/style-components/Card';
+import Waiting from './Waiting';
 
 interface GPSMapProps {
   height: number;
@@ -12,7 +12,7 @@ function GPSMap({ height, latitude, longitude }: GPSMapProps) {
   return (
     <Card style={{ height, width: '100%', padding: 0 }}>
       {Number.isNaN(latitude) && Number.isNaN(longitude)
-        ? <Spinner style={{ height: '100%' }} label="Waiting GPS..." />
+        ? <Waiting />
         : (
           <MapContainer
             zoomControl={false}
