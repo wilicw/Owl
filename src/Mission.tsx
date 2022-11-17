@@ -15,10 +15,10 @@ function Mission() {
 
   return (
     <MissionPanel
-      missionName="Flight Test 2022 Oct 1"
-      rocketType="BlueShark"
-      motorType="BlueShark"
-      avionicType="ESP8266"
+      missionName={`Flight Test ${new Date().toLocaleDateString('en-US')}`}
+      rocketType="Small Rocket"
+      motorType="ISP uno"
+      avionicType="Avionics ESP8266"
       message={message}
     />
   );
