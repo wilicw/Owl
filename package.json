@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
     "@linaria/atomic": "^4.2.2",
     "@linaria/babel-preset": "^4.3.0",
     "@linaria/core": "^4.2.2",
@@ -11,6 +12,7 @@
     "@linaria/rollup": "^4.2.2",
     "@reactivex/rxjs": "^6.6.7",
     "@reduxjs/toolkit": "^1.8.6",
+    "@rxjs-ninja/rxjs-utility": "^5.1.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",

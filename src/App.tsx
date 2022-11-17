@@ -1,8 +1,8 @@
 import Container from '@/style-components/Container';
-import { Flex, Box } from 'rebass';
+import { Flex, Box, Button } from 'rebass';
 import { useDispatch } from 'react-redux';
 import AvionicConnectionLabel from '@/ConnectionLabel';
-import { setLocation } from '@/redux/reducer';
+import { setLocation, setPort } from '@/redux/reducer';
 import locationObservable from '@/services/LocationProvider';
 import {
   AccelerationChart, AltitudeChart, TemperatureChart, VelocityChart,
@@ -152,8 +152,13 @@ function App() {
           rocketType="BlueShark"
           motorType="BlueShark"
           avionicType="ESP8266"
-          message="<< TYPE,THRUST;IGN,0;CAMERA,0;LOAD,0;"
         />
+        <Button
+          style={{ marginTop: '1em', width: '100%' }}
+          onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
+        >
+          Connection
+        </Button>
       </Box>
       <Box
         width={1}

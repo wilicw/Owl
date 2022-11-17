@@ -1,5 +1,5 @@
 import {
-  filter, map, mergeMap, Observable, share,
+  filter, map, mergeMap, Observable, share, tap,
 } from 'rxjs';
 import connectionObservable from './ConnectionProvider';
 
@@ -8,6 +8,7 @@ enum MessageType {
   Altitude = 'ALTI',
   Velocity = 'VEL',
   Acceleration = 'ACCE',
+  Gyroscope = 'GYRO',
 }
 
 interface Message {
@@ -23,7 +24,7 @@ interface GeneralSensorMessage extends Message {
 
 const generalSensorParser = (message: Message): GeneralSensorMessage => {
   const valueArray = message.value.flat();
-  const timestamp = parseInt(valueArray[0], 10);
+  const timestamp = parseInt(valueArray[0], 10) / 1000;
   const sensorID = parseInt(valueArray[1], 10);
   const value = parseFloat(valueArray[2]);
   return {
@@ -35,13 +36,29 @@ const generalSensorParser = (message: Message): GeneralSensorMessage => {
   };
 };
 
+const netAcce = (x: number, y: number, z:number) => Math.sqrt(x * x + y * y + z * z);
+
 const messageObservable: Observable<Message> = connectionObservable.pipe(
-  filter((x) => x.data !== undefined),
-  mergeMap((x) => [x.data.trim().split(',').map((y: string) => y.split(','))]),
-  mergeMap((x) => [{
-    type: x[0][0],
-    value: x.slice(1),
-  }]),
+  mergeMap((x) => [x?.split(',')]),
+  mergeMap((x) => {
+    if (x === undefined) return x;
+    const timestamp = x[1];
+    return [
+      {
+        type: MessageType.Altitude,
+        value: [timestamp, '0', x[2]],
+      },
+      {
+        type: MessageType.Velocity,
+        value: [timestamp, '0', x[4]],
+      },
+      {
+        type: MessageType.Acceleration,
+        value: [timestamp, '0', netAcce(parseFloat(x[5]), parseFloat(x[6]), parseFloat(x[7]))],
+      },
+    ];
+  }),
+  filter((x) => x !== undefined),
   share(),
 );
 
@@ -62,6 +79,11 @@ const velocityObservable: Observable<GeneralSensorMessage> = messageObservable.p
 
 const accelerationObservable: Observable<GeneralSensorMessage> = messageObservable.pipe(
   filter((message) => message.type === MessageType.Acceleration),
+  map(generalSensorParser),
+);
+
+const gyroscopeObservable: Observable<GeneralSensorMessage> = messageObservable.pipe(
+  filter((message) => message.type === MessageType.Gyroscope),
   map(generalSensorParser),
 );
 

@@ -12,6 +12,7 @@ interface IState {
   time: number;
   connect: boolean;
   wsURL: string;
+  port: any;
 }
 
 const initialTime = -10 * 1000;
@@ -30,6 +31,7 @@ const initialState: IState = {
   lock: true,
   connect: false,
   wsURL: localStorage.getItem('wsURL') || 'ws://127.0.0.1:81',
+  port: null,
 };
 
 const appReducer = createSlice({
@@ -67,10 +69,13 @@ const appReducer = createSlice({
       state.wsURL = action.payload;
       localStorage.setItem('wsURL', action.payload);
     },
+    setPort: (state: IState, action) => {
+      state.port = action.payload;
+    },
   },
 });
 
 export const {
-  unlock, lock, launch, setLocation, abort, setTime, stop, setConnection, setWSURL,
+  unlock, lock, launch, setLocation, abort, setTime, stop, setConnection, setWSURL, setPort,
 } = appReducer.actions;
 export default appReducer.reducer;
