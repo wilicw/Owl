@@ -8,13 +8,13 @@ import {
   AccelerationChart, AltitudeChart, GyroChart, TemperatureChart, VelocityChart,
 } from '@/Chart';
 import AutoMap from '@/Map';
-import MissionPanel from '@/components/MissionPanel';
 import { TemperatureLabel, WindLabel } from '@/Weather';
 import Timer from '@/components/Timer';
 import ProgressBar from '@/components/ProgressBar';
 import ValueLabel from '@/components/ValueLabel';
 import StatusLabel from '@/StatusLabel';
 import Text from '@/style-components/Text';
+import Mission from './Mission';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
@@ -137,12 +137,7 @@ function App() {
         width={[1, 1, 1, 1 / 4]}
         p={2}
       >
-        <MissionPanel
-          missionName="Flight Test 2022 Oct 1"
-          rocketType="BlueShark"
-          motorType="BlueShark"
-          avionicType="ESP8266"
-        />
+        <Mission />
         {
         navigator?.serial ? (
           <Button

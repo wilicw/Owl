@@ -11,6 +11,7 @@
     "@linaria/react": "^4.3.0",
     "@linaria/rollup": "^4.2.2",
     "@reactivex/rxjs": "^6.6.7",
+    "@rebass/forms": "^4.0.6",
     "@reduxjs/toolkit": "^1.8.6",
     "@rxjs-ninja/rxjs-utility": "^5.1.2",
     "@testing-library/jest-dom": "^5.16.5",

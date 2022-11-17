@@ -41,7 +41,6 @@ const connectionObservable:Observable<string> = interval(1000)
       store.dispatch(setConnection(true));
       return new TextDecoder().decode(data);
     }),
-    share(),
     map((x) => {
       buffer += x;
       const arr = buffer.match(msgRegex);
@@ -50,6 +49,7 @@ const connectionObservable:Observable<string> = interval(1000)
       return '';
     }),
     filter((x) => x.length > 0),
+    share(),
   );
 
 export default connectionObservable;

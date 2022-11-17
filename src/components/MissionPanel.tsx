@@ -7,17 +7,21 @@ import {
 } from '@/redux/reducer';
 import Separator from '@/style-components/Separator';
 import { sendMessage$ } from '@/services/ConnectionProvider';
+import { Input, Textarea } from '@rebass/forms';
+import { useState } from 'react';
 
 interface MissionPanelProps {
   missionName: string;
   rocketType: string;
   motorType: string;
   avionicType: string;
+  message: string;
 }
 
 function MissionPanel({
-  missionName, rocketType, motorType, avionicType,
+  missionName, rocketType, motorType, avionicType, message,
 }: MissionPanelProps) {
+  const [command, setCommand] = useState('');
   const dispatch = useAppDispatch();
   const isLock = useAppSelector((state) => state.app.lock);
   const isLaunch = useAppSelector((state) => state.app.launched);
@@ -50,6 +54,15 @@ function MissionPanel({
     sendMessage$.next(new TextEncoder().encode('open\n'));
   };
 
+  const commandAction = (e) => {
+    console.log(`Send:${command}`);
+    sendMessage$.next(new TextEncoder().encode('nostream\n'));
+    sendMessage$.next(new TextEncoder().encode(`${command}\n`));
+    sendMessage$.next(new TextEncoder().encode('stream\n'));
+    setCommand(() => '');
+    e.preventDefault();
+  };
+
   return (
     <Card>
       <div>
@@ -65,7 +78,29 @@ function MissionPanel({
         <Text block>{avionicType}</Text>
       </div>
       <Text>Message:</Text>
-      <textarea style={{ marginTop: '1em', marginBottom: '1em' }} />
+      <div style={{
+        marginTop: '1em', marginBottom: '1em',
+      }}
+      >
+        <Textarea
+          style={{
+            width: '100%', height: 150,
+          }}
+          readonly
+          value={message}
+        />
+        <br />
+        <form onSubmit={commandAction}>
+          <Input
+            id="cmd"
+            name="command"
+            type="text"
+            onChange={(e) => setCommand(() => e.target.value)}
+            value={command}
+            placeholder="Enter command..."
+          />
+        </form>
+      </div>
       {
       time > 0 ? (
         <>
