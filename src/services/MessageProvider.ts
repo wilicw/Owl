@@ -4,6 +4,7 @@ import {
 import connectionObservable from './ConnectionProvider';
 
 enum MessageType {
+  Status = 'STAT',
   Temperature = 'TEMP',
   Altitude = 'ALTI',
   Velocity = 'VEL',
@@ -45,6 +46,10 @@ const messageObservable: Observable<Message> = connectionObservable.pipe(
     if (x === undefined) return x;
     const timestamp = x[1];
     return [
+      {
+        type: MessageType.Status,
+        value: [timestamp, ['0'], [x[0]]],
+      },
       {
         type: MessageType.Altitude,
         value: [timestamp, ['0'], [x[2]]],
@@ -91,7 +96,13 @@ const gyroscopeObservable: Observable<GeneralSensorMessage> = messageObservable.
   map(generalSensorParser),
 );
 
+const statusObservable = messageObservable.pipe(
+  filter((message) => message.type === MessageType.Status),
+  map((x) => x.value),
+);
+
 export {
   messageObservable, temperatureObservable, altitudeObservable,
   velocityObservable, accelerationObservable, gyroscopeObservable,
+  statusObservable,
 };

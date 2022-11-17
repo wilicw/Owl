@@ -13,6 +13,7 @@ import { TemperatureLabel, WindLabel } from '@/Weather';
 import Timer from '@/components/Timer';
 import ProgressBar from '@/components/ProgressBar';
 import ValueLabel from '@/components/ValueLabel';
+import StatusLabel from '@/StatusLabel';
 import Text from '@/style-components/Text';
 
 function App() {
@@ -48,11 +49,7 @@ function App() {
             flexWrap: 'wrap',
           }}
           >
-            <ValueLabel
-              labelColor="#555"
-              labelName="Status"
-              value="IDLE"
-            />
+            <StatusLabel />
 
             <ValueLabel
               labelColor="#555"
