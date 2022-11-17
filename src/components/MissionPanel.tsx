@@ -7,8 +7,7 @@ import {
 } from '@/redux/reducer';
 import Separator from '@/style-components/Separator';
 import { sendMessage$ } from '@/services/ConnectionProvider';
-import { Input, Textarea } from '@rebass/forms';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface MissionPanelProps {
   missionName: string;
@@ -55,7 +54,6 @@ function MissionPanel({
   };
 
   const commandAction = (e) => {
-    console.log(`Send:${command}`);
     sendMessage$.next(new TextEncoder().encode('nostream\n'));
     sendMessage$.next(new TextEncoder().encode(`${command}\n`));
     sendMessage$.next(new TextEncoder().encode('stream\n'));
@@ -78,24 +76,22 @@ function MissionPanel({
         <Text block>{avionicType}</Text>
       </div>
       <Text>Message:</Text>
-      <div style={{
-        marginTop: '1em', marginBottom: '1em',
-      }}
-      >
-        <Textarea
+      <div>
+        <textarea
           style={{
             width: '100%', height: 150,
           }}
-          readonly
+          readOnly
           value={message}
         />
         <br />
         <form onSubmit={commandAction}>
-          <Input
+          <input
             id="cmd"
             name="command"
             type="text"
-            onChange={(e) => setCommand(() => e.target.value)}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setCommand(() => e.target.value)}
+            style={{ width: '100%' }}
             value={command}
             placeholder="Enter command..."
           />
