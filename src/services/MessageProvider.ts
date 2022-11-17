@@ -1,5 +1,5 @@
 import {
-  filter, map, mergeMap, Observable, share, tap,
+  filter, map, mergeMap, Observable, share,
 } from 'rxjs';
 import connectionObservable from './ConnectionProvider';
 
@@ -40,6 +40,7 @@ const netAcce = (x: number, y: number, z:number) => Math.sqrt(x * x + y * y + z 
 
 const messageObservable: Observable<Message> = connectionObservable.pipe(
   mergeMap((x) => [x.split(',')]),
+  filter((x) => x.length >= 14),
   mergeMap((x): Message[] => {
     if (x === undefined) return x;
     const timestamp = x[1];
