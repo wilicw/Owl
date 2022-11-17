@@ -13,6 +13,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
   '@testing-library/user-event': ^14.4.3
+  '@types/dom-serial': ^1.0.3
   '@types/jest': ^29.2.0
   '@types/leaflet': ^1.9.0
   '@types/lodash': ^4.14.186
@@ -63,6 +64,7 @@ dependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.4.3_znccgeejomvff3jrsk3ljovfpu
+  '@types/dom-serial': 1.0.3
   '@types/jest': 29.2.0
   '@types/leaflet': 1.9.0
   '@types/lodash': 4.14.186
@@ -4187,6 +4189,10 @@ packages:
 
   /@types/d3-time/2.1.1:
     resolution: {integrity: sha512-9MVYlmIgmRR31C5b4FVSWtuMmBHh2mOWQYfl7XAYOa8dsnb7iEmUmRSWSFgXFtkjxO65d7hTUHQC+RhR/9IWFg==}
+    dev: false
+
+  /@types/dom-serial/1.0.3:
+    resolution: {integrity: sha512-iuuXTHSUQfosDJTN3AxTHfYtDZVehzAc07P0d6Y6/D0mNMoAzSQcAB8cf3glzH8MfMpZx8JDQv9C+PBpILVI3g==}
     dev: false
 
   /@types/eslint-scope/3.7.4:

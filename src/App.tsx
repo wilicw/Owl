@@ -9,11 +9,11 @@ import {
 } from '@/Chart';
 import AutoMap from '@/Map';
 import MissionPanel from '@/components/MissionPanel';
-import DataVisualization from '@/components/DataVisualization';
 import { TemperatureLabel, WindLabel } from '@/Weather';
 import Timer from '@/components/Timer';
 import ProgressBar from '@/components/ProgressBar';
 import ValueLabel from '@/components/ValueLabel';
+import Text from '@/style-components/Text';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
@@ -146,12 +146,16 @@ function App() {
           motorType="BlueShark"
           avionicType="ESP8266"
         />
-        <Button
-          style={{ marginTop: '1em', width: '100%' }}
-          onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
-        >
-          Connection
-        </Button>
+        {
+        navigator?.serial ? (
+          <Button
+            style={{ marginTop: '1em', width: '100%' }}
+            onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
+          >
+            Connection
+          </Button>
+        ) : <Text block align="center">Web Serial API is not available</Text>
+      }
       </Box>
       <Box
         width={1}
