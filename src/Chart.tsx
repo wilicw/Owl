@@ -51,7 +51,7 @@ function AccelerationChart({ height }: ChartProps) {
       colors={['#45425A']}
       keys={['value']}
       chartName="Acceleration"
-      unit="m/s²"
+      unit="g"
       data={data}
       height={height}
     />

@@ -73,15 +73,22 @@ function DataVisualization({
             <LineChart
               data={data}
               margin={{
-                top: 0, bottom: 0, left: 0, right: 12,
+                top: 0, bottom: -10, left: 0, right: 12,
               }}
             >
               { _.zip(keys, colors).map(([key, color]) => (
                 <Line type="monotone" dataKey={key} stroke={color} dot={false} />
               ))}
               <CartesianGrid stroke="#ccc" />
-              <XAxis dataKey="time" allowDecimals={false} type="number" domain={[0, 'dataMax']} tickFormatter={DataFormatter} />
-              <YAxis tickFormatter={DataFormatter} width={40} />
+              <XAxis
+                dataKey="time"
+                allowDecimals={false}
+                type="number"
+                domain={[0, 'dataMax']}
+                tickFormatter={DataFormatter}
+                style={{ fontSize: 12 }}
+              />
+              <YAxis tickFormatter={DataFormatter} width={40} style={{ fontSize: 12 }} />
             </LineChart>
           </ResponsiveContainer>
         ) : <Waiting />
