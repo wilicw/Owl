@@ -1,6 +1,5 @@
 import Card from '@/style-components/Card';
 import Text from '@/style-components/Text';
-import { Button } from 'rebass';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import {
   abort, lock, unlock, launch, stop,
@@ -8,6 +7,7 @@ import {
 import Separator from '@/style-components/Separator';
 import { sendMessage$ } from '@/services/ConnectionProvider';
 import React, { useState } from 'react';
+import Button from '@/style-components/Button';
 
 interface MissionPanelProps {
   missionName: string;
@@ -84,7 +84,6 @@ function MissionPanel({
           readOnly
           value={message}
         />
-        <br />
         <form onSubmit={commandAction}>
           <input
             id="cmd"
@@ -96,6 +95,7 @@ function MissionPanel({
             placeholder="Enter command..."
           />
         </form>
+        <br />
       </div>
       {
       time > 0 ? (
@@ -108,14 +108,15 @@ function MissionPanel({
       ) : (
         <>
           <Button
-            color={isLaunch ? '#bc2f32' : '#005C69'}
-            variant="primary"
-            disabled={isLock}
+            style={{
+              backgroundColor: isLaunch ? '#bc2f32' : '#72B01D',
+              display: isLock ? 'none' : '',
+            }}
             onClick={isLaunch ? abortAction : launchAction}
           >
             {isLaunch ? 'Abort' : 'Launch'}
           </Button>
-          <Button variant="primary" onClick={isLock ? unlockAction : lockAction} disabled={isLaunch}>
+          <Button onClick={isLock ? unlockAction : lockAction} disabled={isLaunch}>
             {isLock ? 'Unlock' : 'Lock'}
           </Button>
         </>

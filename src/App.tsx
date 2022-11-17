@@ -1,5 +1,5 @@
 import Container from '@/style-components/Container';
-import { Flex, Box, Button } from 'rebass';
+import { Flex, Box } from 'rebass';
 import { useDispatch } from 'react-redux';
 import AvionicConnectionLabel from '@/ConnectionLabel';
 import { setLocation, setPort } from '@/redux/reducer';
@@ -14,6 +14,7 @@ import ProgressBar from '@/components/ProgressBar';
 import ValueLabel from '@/components/ValueLabel';
 import StatusLabel from '@/StatusLabel';
 import Text from '@/style-components/Text';
+import Button from '@/style-components/Button';
 import Mission from './Mission';
 
 function App() {
@@ -141,10 +142,10 @@ function App() {
         {
         navigator?.serial ? (
           <Button
-            style={{ marginTop: '1em', width: '100%' }}
+            style={{ marginTop: '1em', width: '100%', backgroundColor: '#454955' }}
             onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
           >
-            Connection
+            Serial Port
           </Button>
         ) : <Text block align="center">Web Serial API is not available</Text>
       }
