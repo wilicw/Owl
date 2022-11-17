@@ -1,11 +1,6 @@
 import Card from '@/style-components/Card';
 import Text from '@/style-components/Text';
-// import {
-//   CompoundButton,
-//   Textarea,
-//   Label,
-//   Button,
-// } from '@fluentui/react-components';
+import { Button } from 'rebass';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import {
   abort, lock, unlock, launch, stop,
@@ -17,11 +12,10 @@ interface MissionPanelProps {
   rocketType: string;
   motorType: string;
   avionicType: string;
-  message: string;
 }
 
 function MissionPanel({
-  missionName, rocketType, motorType, avionicType, message,
+  missionName, rocketType, motorType, avionicType,
 }: MissionPanelProps) {
   const dispatch = useAppDispatch();
   const isLock = useAppSelector((state) => state.app.lock);
@@ -43,25 +37,26 @@ function MissionPanel({
         <Text block>{avionicType}</Text>
       </div>
       <Text>Message:</Text>
-      <textarea />
+      <textarea style={{ marginTop: '1em', marginBottom: '1em' }} />
       {
       time > 0 ? (
         <>
-          <button>
+          <Button>
             Parachute Deploy
-          </button>
-          <button onClick={() => dispatch(stop())}>Stop</button>
+          </Button>
+          <Button onClick={() => dispatch(stop())}>Stop</Button>
         </>
       ) : (
         <>
-          <button
-            style={{ backgroundColor: isLaunch ? '#bc2f32' : '' }}
+          <Button
+            color={isLaunch ? '#bc2f32' : '#005C69'}
+            variant="primary"
             disabled={isLock}
             onClick={() => dispatch(isLaunch ? abort() : launch())}
           >
             {isLaunch ? 'Abort' : 'Launch'}
-          </button>
-          <button onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</button>
+          </Button>
+          <Button variant="primary" onClick={() => dispatch(isLock ? unlock() : lock())} disabled={isLaunch}>{isLock ? 'Unlock' : 'Lock'}</Button>
         </>
       )
     }

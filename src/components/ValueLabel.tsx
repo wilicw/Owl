@@ -21,7 +21,6 @@ function ValueLabel({
       display: 'flex',
       justifyContent: 'center',
       marginRight: '.5em',
-      marginTop: '.5em',
       marginBottom: '.5em',
     }}
     >
