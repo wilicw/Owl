@@ -3,7 +3,7 @@ import IDataVisual from '@/interfaces/IDataVisual';
 import DataVisualization from '@/components/DataVisualization';
 import {
   temperatureObservable, altitudeObservable,
-  velocityObservable, accelerationObservable,
+  velocityObservable, accelerationObservable, gyroscopeObservable,
 } from '@/services/MessageProvider';
 
 interface ChartProps {
@@ -16,7 +16,7 @@ function AltitudeChart({ height }: ChartProps) {
   useEffect(() => {
     const subscription = altitudeObservable.subscribe((x) => {
       setData(
-        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue[0] }],
       );
     });
     return () => subscription.unsubscribe();
@@ -40,7 +40,7 @@ function AccelerationChart({ height }: ChartProps) {
   useEffect(() => {
     const subscription = accelerationObservable.subscribe((x) => {
       setData(
-        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue[0] }],
       );
     });
     return () => subscription.unsubscribe();
@@ -64,7 +64,7 @@ function TemperatureChart({ height }: ChartProps) {
   useEffect(() => {
     const subscription = temperatureObservable.subscribe((x) => {
       setData(
-        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue[0] }],
       );
     });
     return () => subscription.unsubscribe();
@@ -88,7 +88,7 @@ function VelocityChart({ height }: ChartProps) {
   useEffect(() => {
     const subscription = velocityObservable.subscribe((x) => {
       setData(
-        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue }],
+        (prev) => [...prev, { time: x.timestamp, value: x.sensorValue[0] }],
       );
     });
     return () => subscription.unsubscribe();
@@ -106,6 +106,34 @@ function VelocityChart({ height }: ChartProps) {
   );
 }
 
+function GyroChart({ height }: ChartProps) {
+  const [data, setData] = useState<IDataVisual[]>([]);
+
+  useEffect(() => {
+    const subscription = gyroscopeObservable.subscribe((x) => {
+      setData(
+        (prev) => [...prev, {
+          time: x.timestamp,
+          x: x.sensorValue[0],
+          y: x.sensorValue[1],
+          z: x.sensorValue[2],
+        }],
+      );
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+  return (
+    <DataVisualization
+      colors={['#5FAD41', '#FA7921', '#2892D7']}
+      keys={['x', 'y', 'z']}
+      chartName="Gyroscope"
+      unit="??"
+      data={data}
+      height={height}
+    />
+  );
+}
+
 export {
-  AltitudeChart, AccelerationChart, TemperatureChart, VelocityChart,
+  AltitudeChart, AccelerationChart, TemperatureChart, VelocityChart, GyroChart,
 };

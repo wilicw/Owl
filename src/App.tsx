@@ -5,7 +5,7 @@ import AvionicConnectionLabel from '@/ConnectionLabel';
 import { setLocation, setPort } from '@/redux/reducer';
 import locationObservable from '@/services/LocationProvider';
 import {
-  AccelerationChart, AltitudeChart, TemperatureChart, VelocityChart,
+  AccelerationChart, AltitudeChart, GyroChart, TemperatureChart, VelocityChart,
 } from '@/Chart';
 import AutoMap from '@/Map';
 import MissionPanel from '@/components/MissionPanel';
@@ -106,14 +106,7 @@ function App() {
           <AltitudeChart height={cardHeight} />
         </Box>
         <Box p={2} width={1}>
-          <DataVisualization
-            colors={['#28536b', '#DD9787']}
-            keys={['sin', 'cos']}
-            chartName="GYRO"
-            unit="m"
-            data={data}
-            height={cardHeight}
-          />
+          <GyroChart height={cardHeight} />
         </Box>
         <Box p={2} width={1}>
           <TemperatureChart height={cardHeight} />
