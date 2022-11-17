@@ -53,7 +53,7 @@ function MissionPanel({
     sendMessage$.next(new TextEncoder().encode('open\n'));
   };
 
-  const commandAction = (e) => {
+  const commandAction = (e: React.FormEvent<HTMLFormElement>) => {
     sendMessage$.next(new TextEncoder().encode('nostream\n'));
     sendMessage$.next(new TextEncoder().encode(`${command}\n`));
     sendMessage$.next(new TextEncoder().encode('stream\n'));
