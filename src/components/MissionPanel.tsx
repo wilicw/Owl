@@ -3,6 +3,7 @@ import Text from '@/style-components/Text';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import {
   abort, lock, unlock, launch, stop,
+  setPort,
 } from '@/redux/reducer';
 import Separator from '@/style-components/Separator';
 import { sendMessage$ } from '@/services/ConnectionProvider';
@@ -90,12 +91,11 @@ function MissionPanel({
             name="command"
             type="text"
             onChange={(e:React.ChangeEvent<HTMLInputElement>) => setCommand(() => e.target.value)}
-            style={{ width: '100%' }}
+            style={{ width: '100%', height: 20 }}
             value={command}
             placeholder="Enter command..."
           />
         </form>
-        <br />
       </div>
       {
       time > 0 ? (
@@ -116,15 +116,25 @@ function MissionPanel({
           >
             {isLaunch ? 'Abort' : 'Launch'}
           </Button>
-          <Button onClick={isLock ? unlockAction : lockAction} disabled={isLaunch}>
+          <Button onClick={isLock ? unlockAction : lockAction} disabled={isLaunch} style={{ display: isLaunch ? 'none' : '' }}>
             {isLock ? 'Unlock' : 'Lock'}
           </Button>
         </>
       )
     }
+
+      {
+        navigator?.serial ? (
+          <Button
+            style={{ width: '100%', backgroundColor: '#454955' }}
+            onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
+          >
+            Serial Port
+          </Button>
+        ) : <Text block align="center">Web Serial API is not available</Text>
+      }
     </Card>
   );
 }
-// secondaryContent={isLock ? 'Unlock before launching' : ''}
 
 export default MissionPanel;

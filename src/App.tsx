@@ -2,7 +2,7 @@ import Container from '@/style-components/Container';
 import { Flex, Box } from 'rebass';
 import { useDispatch } from 'react-redux';
 import AvionicConnectionLabel from '@/ConnectionLabel';
-import { setLocation, setPort } from '@/redux/reducer';
+import { setLocation } from '@/redux/reducer';
 import locationObservable from '@/services/LocationProvider';
 import {
   AccelerationChart, AltitudeChart, GyroChart, TemperatureChart, VelocityChart,
@@ -13,9 +13,7 @@ import Timer from '@/components/Timer';
 import ProgressBar from '@/components/ProgressBar';
 import ValueLabel from '@/components/ValueLabel';
 import StatusLabel from '@/StatusLabel';
-import Text from '@/style-components/Text';
-import Button from '@/style-components/Button';
-import Mission from './Mission';
+import Mission from '@/Mission';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
@@ -139,16 +137,6 @@ function App() {
         p={2}
       >
         <Mission />
-        {
-        navigator?.serial ? (
-          <Button
-            style={{ marginTop: '1em', width: '100%', backgroundColor: '#454955' }}
-            onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
-          >
-            Serial Port
-          </Button>
-        ) : <Text block align="center">Web Serial API is not available</Text>
-      }
       </Box>
       <Box
         width={1}
