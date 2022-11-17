@@ -1,5 +1,6 @@
 import {
-  retry, share, catchError, throwError, map, Subject, interval, filter, take, mergeMap, map, filter,
+  retry, share, catchError, throwError, map, Subject,
+  interval, filter, take, mergeMap, Observable,
 } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import store from '@/redux/store';
@@ -18,7 +19,7 @@ const ws = webSocket({
 let buffer = '';
 const msgRegex = />>>([^><]*)<<</;
 
-const connectionObservable = interval(1000)
+const connectionObservable:Observable<string> = interval(1000)
   .pipe(
     filter(() => store.getState().app.port),
     take(1),
@@ -33,7 +34,6 @@ const connectionObservable = interval(1000)
   .pipe(
     catchError((err) => {
       store.dispatch(setConnection(false));
-      console.log(err);
       return throwError(err);
     }),
     retry({ delay: 1000 }),
@@ -47,9 +47,9 @@ const connectionObservable = interval(1000)
       const arr = buffer.match(msgRegex);
       buffer = buffer.replace(msgRegex, '');
       if (arr) return arr[0].replace('>>>', '').replace('<<<', '').trim();
-      return null;
+      return '';
     }),
-    filter((x) => x != null),
+    filter((x) => x.length > 0),
   );
 
 export default connectionObservable;
