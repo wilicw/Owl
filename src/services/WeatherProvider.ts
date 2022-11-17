@@ -12,7 +12,7 @@ const weatherElementFilter = (data: any, name: string) => (
   )[0].elementValue
 );
 
-const weatherObservable: Observable<IWeather[]> = timer(0, 20 * 1000).pipe(
+const weatherObservable: Observable<IWeather[]> = timer(0, 10 * 1000).pipe(
   switchMap(() => fetch(weatherApi)),
   filter((response) => response.status === 200),
   mergeMap(async (response) => {
