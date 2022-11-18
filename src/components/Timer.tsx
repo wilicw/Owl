@@ -33,8 +33,7 @@ function Timer() {
   return (
     <Container>
       <UTCTimer />
-      <br />
-      <Clock color={timerColor}>
+      <Clock color={timerColor} style={{ marginTop: 8 }}>
         T
         {refTime < 0 ? '-' : '+'}
         {padding}

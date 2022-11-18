@@ -40,15 +40,17 @@ function App() {
       </Box>
       <Box
         width={[1, 1, 1 / 2, 3 / 4]}
-        p={2}
       >
-        <Container>
+        <Container style={{ paddingBottom: 0 }}>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
           }}
           >
             <StatusLabel />
+            <AvionicConnectionLabel />
+            <WindLabel />
+            <TemperatureLabel />
 
             <ValueLabel
               labelColor="#555"
@@ -89,9 +91,6 @@ function App() {
               value="IDLE"
             />
 
-            <AvionicConnectionLabel />
-            <WindLabel />
-            <TemperatureLabel />
           </div>
         </Container>
       </Box>
