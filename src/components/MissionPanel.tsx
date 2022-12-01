@@ -7,7 +7,7 @@ import {
 } from '@/redux/reducer';
 import Separator from '@/style-components/Separator';
 import { sendMessage$ } from '@/services/ConnectionProvider';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '@/style-components/Button';
 
 interface MissionPanelProps {
@@ -16,16 +16,23 @@ interface MissionPanelProps {
   motorType: string;
   avionicType: string;
   message: string;
+  clearHandle: () => void;
 }
 
 function MissionPanel({
-  missionName, rocketType, motorType, avionicType, message,
+  missionName, rocketType, motorType, avionicType, message, clearHandle,
 }: MissionPanelProps) {
   const [command, setCommand] = useState('');
   const dispatch = useAppDispatch();
   const isLock = useAppSelector((state) => state.app.lock);
   const isLaunch = useAppSelector((state) => state.app.launched);
   const time = useAppSelector((state) => state.app.time);
+  const textRef = useRef<HTMLTextAreaElement>();
+
+  useEffect(() => {
+    const area = textRef.current;
+    if (area) area.scrollTop = area.scrollHeight;
+  }, [message]);
 
   const unlockAction = () => {
     sendMessage$.next(new TextEncoder().encode('stream\n'));
@@ -76,7 +83,10 @@ function MissionPanel({
         <Text block blod>Avionic Type</Text>
         <Text block>{avionicType}</Text>
       </div>
-      <Text>Message:</Text>
+      <div>
+        <Text>Message:</Text>
+        <Text onClick={clearHandle} style={{ float: 'right', cursor: 'pointer' }}>clear</Text>
+      </div>
       <div>
         <textarea
           style={{
@@ -84,6 +94,7 @@ function MissionPanel({
           }}
           readOnly
           value={message}
+          ref={textRef}
         />
         <form onSubmit={commandAction}>
           <input

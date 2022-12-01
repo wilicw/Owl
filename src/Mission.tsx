@@ -13,6 +13,8 @@ function Mission() {
     return () => subscription.unsubscribe();
   }, []);
 
+  const clear = () => setMessage(() => '');
+
   return (
     <MissionPanel
       missionName={`Flight Test ${new Date().toLocaleDateString('en-US')}`}
@@ -20,6 +22,7 @@ function Mission() {
       motorType="ISP uno"
       avionicType="Avionics ESP8266"
       message={message}
+      clearHandle={clear}
     />
   );
 }
