@@ -27,7 +27,7 @@ function MissionPanel({
   const isLock = useAppSelector((state) => state.app.lock);
   const isLaunch = useAppSelector((state) => state.app.launched);
   const time = useAppSelector((state) => state.app.time);
-  const textRef = useRef<HTMLTextAreaElement>();
+  const textRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     const area = textRef.current;
