@@ -14,6 +14,7 @@ import ProgressBar from '@/components/ProgressBar';
 import ValueLabel from '@/components/ValueLabel';
 import StatusLabel from '@/StatusLabel';
 import Mission from '@/Mission';
+import CameraCard from '@/components/CameraCard';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
@@ -128,6 +129,12 @@ function App() {
             p={2}
           >
             <AutoMap height={cardHeight} />
+          </Box>
+          <Box
+            width={[1, 1, 1, 1 / 2]}
+            p={2}
+          >
+            <CameraCard height={cardHeight} />
           </Box>
         </Flex>
       </Box>

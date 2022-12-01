@@ -42,6 +42,7 @@ specifiers:
   react-leaflet: ^4.1.0
   react-redux: ^8.0.4
   react-scripts: 5.0.1
+  react-webcam: ^7.0.1
   rebass: ^4.0.7
   recharts: ^2.1.15
   rollup-plugin-css-only: ^4.2.0
@@ -94,6 +95,7 @@ dependencies:
   react-leaflet: 4.1.0_ck4vhzg7aizutrwygiu3aueify
   react-redux: 8.0.4_tbejbu3qbszqgiqxwlr66wo3nu
   react-scripts: 5.0.1_7l6ykzgpxuclzxw2irbx7c3jdq
+  react-webcam: 7.0.1_biqbaboplfbrettd7655fr4n2y
   rebass: 4.0.7_react@18.2.0
   recharts: 2.1.15_v2m5e27vhdewzwhryxwfaorcca
   rollup-plugin-css-only: 4.2.0_rollup@2.79.1
@@ -12309,6 +12311,16 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-lifecycles-compat: 3.0.4
+    dev: false
+
+  /react-webcam/7.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-8E/Eb/7ksKwn5QdLn67tOR7+TdP9BZdu6E5/DSt20v8yfW/s0VGBigE6VA7R4278mBuBUowovAB3DkCfVmSPvA==}
+    peerDependencies:
+      react: '>=16.2.0'
+      react-dom: '>=16.2.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:
