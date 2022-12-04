@@ -8,7 +8,7 @@ interface Rocket3DProp {
 function Rocket3D({ height }:Rocket3DProp) {
   return (
     <Card style={{ height, padding: 0 }}>
-      <Canvas />
+      Rocket 3D view will display here.
     </Card>
   );
 }
