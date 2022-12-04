@@ -40,7 +40,6 @@ function DataVisualization({
 }: DataVisualProps) {
   const displayedValue: string = keys.length === 1 ? (data.length ? data[data.length - 1][keys[0]] : 0).toFixed(4) : '';
   const [isOpen, setOverlay] = useState(false);
-  const closeOverlay = () => setOverlay(false);
   return (
     <div>
       <Card
@@ -79,7 +78,7 @@ function DataVisualization({
             <LineChart
               data={data}
               margin={{
-                top: 0, bottom: -10, left: 0, right: 12,
+                top: 0, bottom: -8, left: 0, right: 12,
               }}
             >
               { _.zip(keys, colors).map(([key, color]) => (
@@ -95,6 +94,18 @@ function DataVisualization({
                 style={{ fontSize: 12 }}
               />
               <YAxis tickFormatter={DataFormatter} width={40} style={{ fontSize: 12 }} />
+
+              <Legend
+                wrapperStyle={{
+                  position: 'absolute',
+                  top: 5,
+                  right: 10,
+                  fontSize: 10,
+                  height: 0,
+                }}
+                iconSize={10}
+                layout="vertical"
+              />
             </LineChart>
           </ResponsiveContainer>
         ) : <Waiting />
