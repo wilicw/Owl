@@ -127,7 +127,7 @@ function GyroChart({ height }: ChartProps) {
       colors={['#5FAD41', '#FA7921', '#2892D7']}
       keys={['x', 'y', 'z']}
       chartName="Gyroscope"
-      unit="??"
+      unit="rad/s"
       data={data}
       height={height}
     />
