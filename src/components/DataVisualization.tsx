@@ -1,10 +1,12 @@
 import {
-  LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer,
+  LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend,
 } from 'recharts';
 import Card from '@/style-components/Card';
 import Text from '@/style-components/Text';
 import _ from 'lodash';
 import IDataVisual from '@/interfaces/IDataVisual';
+import { useState } from 'react';
+import Overlay from './Overlay';
 import Waiting from './Waiting';
 
 interface DataVisualProps {
@@ -37,37 +39,41 @@ function DataVisualization({
   colors, height, chartName, unit, data, keys,
 }: DataVisualProps) {
   const displayedValue: string = keys.length === 1 ? (data.length ? data[data.length - 1][keys[0]] : 0).toFixed(4) : '';
+  const [isOpen, setOverlay] = useState(false);
+  const closeOverlay = () => setOverlay(false);
   return (
-    <Card
-      style={{
-        padding: 0,
-        height,
-      }}
-    >
-      <Text
-        block
+    <div>
+      <Card
         style={{
-          paddingLeft: 12,
-          paddingRight: 12,
+          padding: 0,
+          height,
         }}
+        onClick={() => setOverlay(true)}
       >
-        <Text>
-          {chartName}
+        <Text
+          block
+          style={{
+            paddingLeft: 12,
+            paddingRight: 12,
+          }}
+        >
+          <Text>
+            {chartName}
+          </Text>
+          {
+          keys.length === 1 ? (
+            <>
+              <Text style={{ float: 'right', marginLeft: 2 }}>
+                {unit}
+              </Text>
+              <Text style={{ float: 'right' }}>
+                {displayedValue}
+              </Text>
+            </>
+          ) : null
+        }
         </Text>
         {
-        keys.length === 1 ? (
-          <>
-            <Text style={{ float: 'right', marginLeft: 2 }}>
-              {unit}
-            </Text>
-            <Text style={{ float: 'right' }}>
-              {displayedValue}
-            </Text>
-          </>
-        ) : null
-      }
-      </Text>
-      {
         data.length ? (
           <ResponsiveContainer width="100%">
             <LineChart
@@ -93,7 +99,47 @@ function DataVisualization({
           </ResponsiveContainer>
         ) : <Waiting />
       }
-    </Card>
+      </Card>
+      {
+      isOpen ? (
+        <Overlay close={() => setOverlay(false)}>
+          <Text>
+            {chartName}
+            (
+            {unit}
+            )
+          </Text>
+          <br />
+          <ResponsiveContainer width="100%" height="95%">
+            <LineChart
+              data={data}
+              margin={{
+                top: 10,
+                bottom: 0,
+                left: -30,
+                right: 0,
+              }}
+            >
+              { _.zip(keys, colors).map(([key, color]) => (
+                <Line type="monotone" dataKey={key} stroke={color} dot={false} />
+              ))}
+              <CartesianGrid stroke="#ccc" />
+              <XAxis
+                dataKey="time"
+                allowDecimals={false}
+                type="number"
+                domain={[0, 'dataMax']}
+                tickFormatter={DataFormatter}
+              />
+              <YAxis tickFormatter={DataFormatter} />
+              <Tooltip />
+              <Legend />
+            </LineChart>
+          </ResponsiveContainer>
+        </Overlay>
+      ) : null
+    }
+    </div>
   );
 }
 
