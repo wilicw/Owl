@@ -12,6 +12,8 @@ const Overlay = styled.div`
   padding: 30px;
   background-color: #FFF;
   padding: 12;
+  border-radius: 5;
+  box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14);
 `;
 
 export default Overlay;

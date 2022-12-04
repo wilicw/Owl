@@ -16,7 +16,7 @@ function OverlayCard({ close, children }:OverlayCardProp) {
         top: 0,
         left: 0,
         zIndex: 9999,
-        backgroundColor: 'rgba(0,0,0,0.2)',
+        backgroundColor: 'rgba(0,0,0,0.1)',
       }}
       onClick={close}
       onKeyDown={(e) => e.stopPropagation()}
