@@ -7,8 +7,9 @@ import {
 } from '@/redux/reducer';
 import Separator from '@/style-components/Separator';
 import { sendMessage$ } from '@/services/ConnectionProvider';
-import React, { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Button from '@/style-components/Button';
+import CommandInput from './CommandInput';
 
 interface MissionPanelProps {
   missionName: string;
@@ -22,7 +23,6 @@ interface MissionPanelProps {
 function MissionPanel({
   missionName, rocketType, motorType, avionicType, message, clearHandle,
 }: MissionPanelProps) {
-  const [command, setCommand] = useState('');
   const dispatch = useAppDispatch();
   const isLock = useAppSelector((state) => state.app.lock);
   const isLaunch = useAppSelector((state) => state.app.launched);
@@ -61,12 +61,6 @@ function MissionPanel({
     sendMessage$.next(new TextEncoder().encode('open\n'));
   };
 
-  const commandAction = (e: React.FormEvent<HTMLFormElement>) => {
-    sendMessage$.next(new TextEncoder().encode(`${command}\n`));
-    setCommand(() => '');
-    e.preventDefault();
-  };
-
   return (
     <Card>
       <div>
@@ -94,17 +88,7 @@ function MissionPanel({
           value={message}
           ref={textRef}
         />
-        <form onSubmit={commandAction}>
-          <input
-            id="cmd"
-            name="command"
-            type="text"
-            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setCommand(() => e.target.value)}
-            style={{ width: '100%', height: 20 }}
-            value={command}
-            placeholder="Enter command..."
-          />
-        </form>
+        <CommandInput />
       </div>
       {
       time > 0 ? (
@@ -133,15 +117,15 @@ function MissionPanel({
     }
 
       {
-        navigator?.serial ? (
-          <Button
-            style={{ width: '100%', backgroundColor: '#454955' }}
-            onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
-          >
-            Serial Port
-          </Button>
-        ) : <Text block align="center">Web Serial API is not available</Text>
-      }
+      navigator?.serial ? (
+        <Button
+          style={{ width: '100%', backgroundColor: '#454955' }}
+          onClick={async () => dispatch(setPort(await navigator.serial.requestPort()))}
+        >
+          Serial Port
+        </Button>
+      ) : <Text block align="center">Web Serial API is not available</Text>
+    }
     </Card>
   );
 }

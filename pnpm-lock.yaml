@@ -39,6 +39,7 @@ specifiers:
   lodash: ^4.17.21
   pnpm: ^7.14.0
   react: ^18.2.0
+  react-autocomplete-input: ^1.0.19
   react-dom: ^18.2.0
   react-leaflet: ^4.1.0
   react-redux: ^8.0.4
@@ -96,6 +97,7 @@ dependencies:
   lodash: 4.17.21
   pnpm: 7.14.0
   react: 18.2.0
+  react-autocomplete-input: 1.0.19_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-leaflet: 4.1.0_ck4vhzg7aizutrwygiu3aueify
   react-redux: 8.0.4_ws3qo7nsqige4sh774zahmois4
@@ -9256,6 +9258,10 @@ packages:
     engines: {node: 6.* || 8.* || >= 10.*}
     dev: false
 
+  /get-input-selection/1.1.4:
+    resolution: {integrity: sha512-o3rv95OOpoHznujIEwZljNhUM9efW/gZsIKCQtTrjRU4PkneVpDvxNBmC7kXC4519lZYT95DKcdj0A5f9GZkKg==}
+    dev: false
+
   /get-intrinsic/1.1.3:
     resolution: {integrity: sha512-QJVz1Tj7MS099PevUG5jvnt9tSkXN8K14dxQlikJuPt4uD9hHAHjLyLBiLR5zELelBdD9QNRAXZzsJx0WaDL9A==}
     dependencies:
@@ -13595,6 +13601,20 @@ packages:
       whatwg-fetch: 3.6.2
     dev: false
 
+  /react-autocomplete-input/1.0.19_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-AcdWK5cCNEkh4iVRilgONRviiw2tO6j5ps93D3mZUl6HhLVIMmJb4PspcuiZx7qsdT0BdWgOjLPtfCch7HT+rw==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      core-js: 3.25.3
+      get-input-selection: 1.1.4
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      textarea-caret: 3.1.0
+    dev: false
+
   /react-composer/5.0.3_react@18.2.0:
     resolution: {integrity: sha512-1uWd07EME6XZvMfapwZmc7NgCZqDemcvicRi3wMJzXsQLvZ3L7fTHVyPy1bZdnWXM4iPjYuNE+uJ41MLKeTtnA==}
     peerDependencies:
@@ -15561,6 +15581,10 @@ packages:
 
   /text-table/0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
+    dev: false
+
+  /textarea-caret/3.1.0:
+    resolution: {integrity: sha512-cXAvzO9pP5CGa6NKx0WYHl+8CHKZs8byMkt3PCJBCmq2a34YA9pO1NrQET5pzeqnBjBdToF5No4rrmkDUgQC2Q==}
     dev: false
 
   /three-mesh-bvh/0.5.19_three@0.147.0:
