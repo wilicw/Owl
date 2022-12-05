@@ -1,7 +1,5 @@
 import { sendMessage$ } from '@/services/ConnectionProvider';
 import React, { useState } from 'react';
-import TextInput from 'react-autocomplete-input';
-import 'react-autocomplete-input/dist/bundle.css';
 
 function CommandInput() {
   const getHistoryArray = () => JSON.parse(localStorage.getItem('command_history') || '[]');
@@ -52,24 +50,26 @@ function CommandInput() {
   };
 
   return (
-    <TextInput
-      Component="input"
+    <input
+      // Component="input"
       id="cmd"
       name="command"
       type="text"
-      onChange={(e: string) => setCommand(() => e)}
+      onChange={(e) => setCommand(() => e.target.value)}
       onKeyDown={commandHistory}
       style={{ width: '100%', height: 20 }}
       value={command}
       placeholder="Enter command..."
-      trigger={['', 'config ', 'config set ', 'pid ']}
-      options={{
-        '': ['launch', 'config', 'pid', 'preLaunch', 'list', 'rocket', 'init', 'restart', 'stop', 'open'],
-        'config ': ['set'],
-        'config set ': ['rtime', 'stime', 'kp', 'ki', 'kd', 'bldc_init', 'gy_target', 'speed_limit'],
-        'pid ': ['on', 'off'],
-      }}
-      spacer=""
+      // trigger={['', 'config ', 'config set ', 'pid ']}
+      // options={{
+      //   '': ['launch', 'config', 'pid', 'preLaunch', 'list', '
+      //   rocket', 'init', 'restart', 'stop', 'open'],
+      //   'config ': ['set'],
+      //   'config set ': ['rtime', 'stime', 'kp', 'ki',
+      //   'kd', 'bldc_init', 'gy_target', 'speed_limit'],
+      //   'pid ': ['on', 'off'],
+      // }}
+      // spacer=""
     />
   );
 }
