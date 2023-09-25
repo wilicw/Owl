@@ -24,7 +24,7 @@ function Timer() {
   const padding = refTimerString[0].padStart(3, '0');
   const floating = refTimerString[1];
 
-  let timerColor = '#bbb';
+  let timerColor = 'green';
   if (isLaunch) {
     if (refTime < 0) timerColor = '#bc2f32';
     else timerColor = 'green';

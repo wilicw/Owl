@@ -1,21 +1,26 @@
-import Container from '@/style-components/Container';
-import { Flex, Box } from 'rebass';
-import { useDispatch } from 'react-redux';
-import AvionicConnectionLabel from '@/ConnectionLabel';
-import { setLocation } from '@/redux/reducer';
-import locationObservable from '@/services/LocationProvider';
+import Container from "@/style-components/Container";
+import { Box, Flex } from "rebass";
+import { useDispatch } from "react-redux";
+import AvionicConnectionLabel from "@/ConnectionLabel";
+import { setLocation, setTime } from "@/redux/reducer";
+import locationObservable from "@/services/LocationProvider";
 import {
-  AccelerationChart, AltitudeChart, GyroChart, TemperatureChart, VelocityChart,
-} from '@/Chart';
-import AutoMap from '@/Map';
-import { TemperatureLabel, WindLabel } from '@/Weather';
-import Timer from '@/components/Timer';
-import ProgressBar from '@/components/ProgressBar';
-import ValueLabel from '@/components/ValueLabel';
-import StatusLabel from '@/StatusLabel';
-import Mission from '@/Mission';
-import CameraCard from '@/components/CameraCard';
-import Rocket3D from '@/components/Rocket3D';
+  AccelerationChart,
+  AltitudeChart,
+  GyroChart,
+  TemperatureChart,
+  VelocityChart,
+} from "@/Chart";
+import AutoMap from "@/Map";
+import { TemperatureLabel, WindLabel } from "@/Weather";
+import Timer from "@/components/Timer";
+import ProgressBar from "@/components/ProgressBar";
+import ValueLabel from "@/components/ValueLabel";
+import StatusLabel from "@/StatusLabel";
+import Mission from "@/Mission";
+import CameraCard from "@/components/CameraCard";
+import { altitudeObservable } from "./services/MessageProvider";
+// import Rocket3D from '@/components/Rocket3D';
 
 function App() {
   const cardHeight = window.innerHeight / 4;
@@ -32,6 +37,9 @@ function App() {
   locationObservable.subscribe((location) => {
     dispatch(setLocation(location));
   });
+  altitudeObservable.subscribe((x) => {
+    dispatch(setTime(x.timestamp * 1000));
+  });
 
   return (
     <Flex flexWrap="wrap" mx={2} height="100vh">
@@ -44,10 +52,11 @@ function App() {
         width={[1, 1, 1 / 2, 3 / 4]}
       >
         <Container style={{ paddingBottom: 0 }}>
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-          }}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+            }}
           >
             <StatusLabel />
             <AvionicConnectionLabel />
@@ -92,7 +101,6 @@ function App() {
               labelName="Parachute #0"
               value="IDLE"
             />
-
           </div>
         </Container>
       </Box>
@@ -141,7 +149,7 @@ function App() {
             width={[1, 1, 1, 1 / 2]}
             p={2}
           >
-            <Rocket3D height={cardHeight} />
+            {/*<Rocket3D height={cardHeight} /> */}
           </Box>
         </Flex>
       </Box>
